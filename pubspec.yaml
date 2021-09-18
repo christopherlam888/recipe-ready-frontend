@@ -33,7 +33,12 @@ dependencies:
   grouped_list: ^4.1.0
   provider: ^5.0.0
   json_annotation: ^4.0.0
+<<<<<<< HEAD
   
+=======
+  http: ^0.13.0
+
+>>>>>>> 318ef09 (Add http dependency)
 dev_dependencies:
   build_runner: ^2.0.0
   json_serializable: ^5.0.0
