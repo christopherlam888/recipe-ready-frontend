@@ -54,22 +54,34 @@ class Recipe {
   factory Recipe.fromJson(Map<String, dynamic> json) => _$RecipeFromJson(json);
 }
 
-class RecipeHistory extends ChangeNotifier {
+class StateTracker extends ChangeNotifier {
   final List<Recipe> _recipes = [];
   UnmodifiableListView<Recipe> get recipes => UnmodifiableListView(_recipes);
 
-  void add(Recipe recipe) {
+  // settings
+  int _numPeople = 1;
+  int _mealsPerDay = 2;
+  bool _vegan = false;
+  bool _vegetarian = false;
+  bool _noDairy = false;
+  bool _noTreenuts = false;
+  bool _noPeanuts = false;
+
+  int get numPeople => _numPeople;
+  int get mealsPerDay => _mealsPerDay;
+
+  void addRecipe(Recipe recipe) {
     _recipes.add(recipe);
     notifyListeners();
   }
 
-  void remove(int index) {
+  void removeRecipe(int index) {
     _recipes.removeAt(index);
     notifyListeners();
   }
 
-  void replace(Recipe recipe, int index) {
-    this.remove(index);
+  void replaceRecipe(Recipe recipe, int index) {
+    _recipes.removeAt(index);
     _recipes.insert(index, recipe);
     notifyListeners();
   }
