@@ -14,7 +14,8 @@ class _GroceriesState extends State<Groceries> {
     return Scaffold(
       backgroundColor: Colors.green,
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 75.0),        child: Container(
+        padding: const EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 75.0),
+        child: Container(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
