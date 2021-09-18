@@ -14,8 +14,16 @@ class _RecipeState extends State<Recipe> {
         padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
         child: Container(
           decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(20)),
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey,
+                blurRadius: 2.0,
+                spreadRadius: 0.0,
+                offset: Offset(2.0, 2.0), // shadow direction: bottom right
+              )
+            ],
           ),
           child: Padding(
             padding: const EdgeInsets.all(15.0),
@@ -37,7 +45,7 @@ class _RecipeState extends State<Recipe> {
                 Text(
                     "Recipe",
                     style: TextStyle(
-                      fontSize: 40.0,
+                      fontSize: 36.0,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     )
@@ -64,20 +72,25 @@ class _RecipeState extends State<Recipe> {
                   ],
                 ),
                 SizedBox(height: 5.0),
-                Text(
-                    "Ingredients",
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: Colors.black,
-                    )
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: Text(
+                      "Ingredients",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.black,
+                      )
+                  ),
                 ),
-                SizedBox(height: 5.0),
-                Text(
-                    "Procedure",
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: Colors.black,
-                    )
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: Text(
+                      "Procedure",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.black,
+                      )
+                  ),
                 ),
               ],
             ),

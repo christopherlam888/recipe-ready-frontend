@@ -24,10 +24,10 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffb3ffb3),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 75.0),
+          padding: const EdgeInsets.fromLTRB(10.0, 40.0, 10.0, 75.0),
           child: Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -35,16 +35,16 @@ class _SettingsState extends State<Settings> {
                 Text(
                   "Settings",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 10.0),
+                SizedBox(height: 20.0),
                 Text(
                   "Dietary Restrictions",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 18),
                 ),
                 SwitchListTile(
                   title: Text("Vegetarian"),
-                  activeColor: Colors.black,
+                  activeColor: Colors.green,
                   value: _isVegetarian,
                   onChanged: (bool value){
                     setState(() {
@@ -54,7 +54,7 @@ class _SettingsState extends State<Settings> {
                 ),
                 SwitchListTile(
                   title: Text("Vegan"),
-                  activeColor: Colors.black,
+                  activeColor: Colors.green,
                   value: _isVegan,
                   onChanged: (bool value){
                     setState(() {
@@ -64,7 +64,7 @@ class _SettingsState extends State<Settings> {
                 ),
                 SwitchListTile(
                   title: Text("Tree Nut Free"),
-                  activeColor: Colors.black,
+                  activeColor: Colors.green,
                   value: _isTreeNutFree,
                   onChanged: (bool value){
                     setState(() {
@@ -74,7 +74,7 @@ class _SettingsState extends State<Settings> {
                 ),
                 SwitchListTile(
                   title: Text("Peanut Free"),
-                  activeColor: Colors.black,
+                  activeColor: Colors.green,
                   value: _isPeanutFree,
                   onChanged: (bool value){
                     setState(() {
@@ -84,7 +84,7 @@ class _SettingsState extends State<Settings> {
                 ),
                 SwitchListTile(
                   title: Text("Dairy Free"),
-                  activeColor: Colors.black,
+                  activeColor: Colors.green,
                   value: _isDairyFree,
                   onChanged: (bool value){
                     setState(() {
@@ -94,7 +94,7 @@ class _SettingsState extends State<Settings> {
                 ),
                 SwitchListTile(
                   title: Text("Halal"),
-                  activeColor: Colors.black,
+                  activeColor: Colors.green,
                   value: _isHalal,
                   onChanged: (bool value){
                     setState(() {
@@ -102,9 +102,10 @@ class _SettingsState extends State<Settings> {
                     });
                   },
                 ),
+                SizedBox(height: 10.0),
                 Text(
                   "Meals",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 18),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -123,7 +124,7 @@ class _SettingsState extends State<Settings> {
                         style: const TextStyle(color: Colors.black),
                         underline: Container(
                           height: 2,
-                          color: Colors.black
+                          color: Colors.green
                         ),
                         onChanged: (String? newValue) {
                           setState(() {
@@ -159,7 +160,7 @@ class _SettingsState extends State<Settings> {
                         style: const TextStyle(color: Colors.black),
                         underline: Container(
                             height: 2,
-                            color: Colors.black
+                            color: Colors.green
                         ),
                         onChanged: (String? newValue) {
                           setState(() {
@@ -195,7 +196,7 @@ class _SettingsState extends State<Settings> {
                         style: const TextStyle(color: Colors.black),
                         underline: Container(
                             height: 2,
-                            color: Colors.black
+                            color: Colors.green
                         ),
                         onChanged: (String? newValue) {
                           setState(() {
