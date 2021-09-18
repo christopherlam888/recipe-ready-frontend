@@ -148,8 +148,8 @@ class StateTracker extends ChangeNotifier {
         final quantity = _groceries[i]?.quantity ?? 0;
         _groceries[i]?.quantity = quantity - (d.quantity ?? 0);
         if (_groceries[i]!.quantity! <= 0) {
-          // TODO: actually remove it instead of hiding it at 0
-          _groceries[i]?.quantity = 0;
+          // delete it
+          _groceries.removeWhere((k, v) => k == i);
         }
       }
     });
