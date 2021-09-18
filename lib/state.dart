@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -40,7 +41,7 @@ class Recipe {
   final int? prepTime;
   final int? yield;
   final String? description;
-  final Map<String, dynamic> ingredients;
+  final Map<String, Grocery> ingredients;
 
   final List<String>? steps;
   final bool vegan;
@@ -62,14 +63,51 @@ class Recipe {
   factory Recipe.fromJson(Map<String, dynamic> json) => _$RecipeFromJson(json);
 }
 
+@JsonSerializable()
+class Grocery {
+  num? quantity;
+  final String? unit;
+  final num? calories;
+  final num? price;
+
+  @JsonKey(name: "image")
+  final String imageLink;
+
+  @JsonKey(name: "price_per_unit")
+  final String? pricePerUnit;
+
+  @JsonKey(ignore: true)
+  bool checked = false;
+
+  Grocery(this.quantity, this.unit, this.calories, this.price, this.imageLink,
+      this.pricePerUnit);
+  factory Grocery.fromJson(Map<String, dynamic> json) =>
+      _$GroceryFromJson(json);
+}
+
 class StateTracker extends ChangeNotifier {
   static final String ROOT_URL = "https://api.eggworld.tk/recipes/";
   final List<Recipe> _recipes = [];
   List<Recipe> get recipes => _recipes;
+  Map<String, Grocery> _groceries = Map(); // quantity (num), metadata (Grocery)
+  Map<String, Grocery> get groceries => _groceries;
 
   // state
-  Recipe activeRecipe = Recipe("demo", "demo", "demo", 1, 1, "demo",
-      {"demo": 1}, [], false, false, false, false, false, false);
+  Recipe activeRecipe = Recipe(
+      "demo",
+      "demo",
+      "demo",
+      1,
+      1,
+      "demo",
+      {"demo": Grocery(1, "demo", 1, 1, "demo", "demo")},
+      [],
+      false,
+      false,
+      false,
+      false,
+      false,
+      false);
 
   // settings
   int numPeople = 1;
@@ -88,18 +126,48 @@ class StateTracker extends ChangeNotifier {
 
   void addRecipe(Recipe recipe) {
     _recipes.add(recipe);
+    // if i in groceries increment the number and replace the unit
+    // otherwise make a new one with all the metadata
+    recipe.ingredients.forEach((i, d) {
+      if (_groceries.containsKey(i)) {
+        // add quantity
+        final quantity = _groceries[i]?.quantity ?? 0;
+        _groceries[i]?.quantity = quantity + (d.quantity ?? 0);
+      } else {
+        _groceries[i] = Grocery(d.quantity, d.unit, d.calories, d.price,
+            d.imageLink, d.pricePerUnit);
+      }
+    });
     notifyListeners();
   }
 
   void removeRecipe(int index) {
+    _recipes[index].ingredients.forEach((i, d) {
+      if (_groceries.containsKey(i)) {
+        // add quantity
+        final quantity = _groceries[i]?.quantity ?? 0;
+        _groceries[i]?.quantity = quantity - (d.quantity ?? 0);
+        if (_groceries[i]!.quantity! <= 0) {
+          // TODO: actually remove it instead of hiding it at 0
+          _groceries[i]?.quantity = 0;
+        }
+      }
+    });
     _recipes.removeAt(index);
     notifyListeners();
   }
 
   void replaceRecipe(Recipe recipe, int index) {
-    _recipes.removeAt(index);
+    removeRecipe(index);
     _recipes.insert(index, recipe);
+    // to get that grocery calculation
+    addRecipe(recipe);
+    _recipes.removeAt(_recipes.length - 1);
     notifyListeners();
+  }
+
+  void clearRecipes() {
+    _recipes.clear();
   }
 
   void fetchMoreRecipes() async {

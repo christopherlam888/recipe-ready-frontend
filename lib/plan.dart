@@ -11,23 +11,6 @@ class Plan extends StatefulWidget {
   _PlanState createState() => _PlanState();
 }
 
-List _recipes = [
-  {'name': 'Some Weird Salad', 'group': 'Day 1'},
-  {'name': 'Spicy Chicken and Potato', 'group': 'Day 1'},
-  {'name': 'The Best Noodles Ever', 'group': 'Day 2'},
-  {'name': 'Some Weird Salad', 'group': 'Day 2'},
-  {'name': 'Some Weird Salad', 'group': 'Day 3'},
-  {'name': 'Some Weird Salad', 'group': 'Day 3'},
-  {'name': 'Some Weird Salad', 'group': 'Day 4'},
-  {'name': 'Some Weird Salad', 'group': 'Day 4'},
-  {'name': 'Some Weird Salad', 'group': 'Day 5'},
-  {'name': 'Some Weird Salad', 'group': 'Day 5'},
-  {'name': 'Some Weird Salad', 'group': 'Day 6'},
-  {'name': 'Some Weird Salad', 'group': 'Day 6'},
-  {'name': 'Some Weird Salad', 'group': 'Day 7'},
-  {'name': 'Some Weird Salad', 'group': 'Day 7'},
-];
-
 class _PlanState extends State<Plan> {
   @override
   Widget build(BuildContext context) {
