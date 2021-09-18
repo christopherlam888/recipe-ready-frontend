@@ -23,7 +23,7 @@ class _SettingsState extends State<Settings> {
                   Text(
                     "Settings",
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 10.0),
                   Text(
@@ -32,7 +32,7 @@ class _SettingsState extends State<Settings> {
                   ),
                   SwitchListTile(
                     title: Text("Vegetarian"),
-                    activeColor: Colors.black,
+                    activeColor: Colors.green,
                     value: state.vegetarian,
                     onChanged: (bool value) {
                       setState(() {
@@ -42,7 +42,7 @@ class _SettingsState extends State<Settings> {
                   ),
                   SwitchListTile(
                     title: Text("Vegan"),
-                    activeColor: Colors.black,
+                    activeColor: Colors.green,
                     value: state.vegan,
                     onChanged: (bool value) {
                       setState(() {
@@ -52,7 +52,7 @@ class _SettingsState extends State<Settings> {
                   ),
                   SwitchListTile(
                     title: Text("Tree nut-free"),
-                    activeColor: Colors.black,
+                    activeColor: Colors.green,
                     value: state.noTreenuts,
                     onChanged: (bool value) {
                       setState(() {
@@ -62,7 +62,7 @@ class _SettingsState extends State<Settings> {
                   ),
                   SwitchListTile(
                     title: Text("Peanut-free"),
-                    activeColor: Colors.black,
+                    activeColor: Colors.green,
                     value: state.noPeanuts,
                     onChanged: (bool value) {
                       setState(() {
@@ -72,7 +72,7 @@ class _SettingsState extends State<Settings> {
                   ),
                   SwitchListTile(
                     title: Text("Dairy-free"),
-                    activeColor: Colors.black,
+                    activeColor: Colors.green,
                     value: state.noDairy,
                     onChanged: (bool value) {
                       setState(() {
@@ -82,7 +82,7 @@ class _SettingsState extends State<Settings> {
                   ),
                   SwitchListTile(
                     title: Text("Halal"),
-                    activeColor: Colors.black,
+                    activeColor: Colors.green,
                     value: state.halal,
                     onChanged: (bool value) {
                       setState(() {
@@ -109,7 +109,7 @@ class _SettingsState extends State<Settings> {
                           iconSize: 24,
                           elevation: 16,
                           style: const TextStyle(color: Colors.black),
-                          underline: Container(height: 2, color: Colors.black),
+                          underline: Container(height: 2, color: Colors.green),
                           onChanged: (String? newValue) {
                             setState(() {
                               state.numPeople = int.parse(newValue!);
@@ -149,7 +149,7 @@ class _SettingsState extends State<Settings> {
                           iconSize: 24,
                           elevation: 16,
                           style: const TextStyle(color: Colors.black),
-                          underline: Container(height: 2, color: Colors.black),
+                          underline: Container(height: 2, color: Colors.green),
                           onChanged: (String? newValue) {
                             setState(() {
                               state.mealsPerDay = int.parse(newValue!);
@@ -181,7 +181,7 @@ class _SettingsState extends State<Settings> {
                           iconSize: 24,
                           elevation: 16,
                           style: const TextStyle(color: Colors.black),
-                          underline: Container(height: 2, color: Colors.black),
+                          underline: Container(height: 2, color: Colors.green),
                           onChanged: (String? newValue) {
                             setState(() {
                               state.numDaysPlanned = int.parse(newValue!);
