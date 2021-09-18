@@ -92,4 +92,10 @@ class StateTracker extends ChangeNotifier {
   }
 }
 
-class 
+class ServerRequest {
+  static final String ROOT_URL = "https://api.eggworld.tk/recipes/";
+
+  Future<http.Response> fetchRecipes() {
+    return http.get(ROOT_URL + "?limit=14");
+  }
+}
