@@ -1,16 +1,9 @@
 import 'dart:collection';
-<<<<<<< HEAD
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
-=======
-
-import 'package:flutter/widgets.dart';
-import 'package:provider/provider.dart';
-import 'package:http/http.dart';
->>>>>>> cf01f87dfe5f032d78287edcd2473f0b87df7a57
 import 'package:json_annotation/json_annotation.dart';
 
 part 'state.g.dart';
