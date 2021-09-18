@@ -72,23 +72,15 @@ class StateTracker extends ChangeNotifier {
       {"demo": 1}, [], false, false, false, false, false, false);
 
   // settings
-  int _numPeople = 1;
-  int _mealsPerDay = 2;
-  bool _vegan = false;
-  bool _vegetarian = false;
-  bool _noDairy = false;
-  bool _noTreenuts = false;
-  bool _noPeanuts = false;
-  bool _halal = false;
-
-  int get numPeople => _numPeople;
-  int get mealsPerDay => _mealsPerDay;
-  bool get vegan => _vegan;
-  bool get vegetarian => _vegetarian;
-  bool get halal => _halal;
-  bool get noDairy => _noDairy;
-  bool get noTreenuts => _noTreenuts;
-  bool get noPeanuts => _noPeanuts;
+  int numPeople = 1;
+  int mealsPerDay = 2;
+  int numDaysPlanned = 7;
+  bool vegan = false;
+  bool vegetarian = false;
+  bool noDairy = false;
+  bool noTreenuts = false;
+  bool noPeanuts = false;
+  bool halal = false;
 
   StateTracker() {
     fetchMoreRecipes();
