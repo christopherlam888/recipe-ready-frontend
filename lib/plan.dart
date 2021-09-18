@@ -48,20 +48,39 @@ class _PlanState extends State<Plan> {
             ),
           ),
           itemBuilder: (c, element) {
-            return Card(
-              elevation: 8.0,
-              margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-              child: Container(
-                child: ListTile(
-                  contentPadding:
-                  EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                  leading: Icon(Icons.restaurant_menu),
-                  title: Text(element['name']),
-                  trailing: IconButton(
-                    icon: Icon(Icons.remove_red_eye),
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/recipe');
-                    },
+            return Slidable(
+              actionPane: SlidableDrawerActionPane(),
+              actions: <Widget>[
+                IconSlideAction(
+                  caption: "Save",
+                  color: Colors.blue,
+                  icon: Icons.save,
+                  onTap: () {},
+                ),
+              ],
+              secondaryActions: <Widget>[
+                IconSlideAction(
+                  caption: "Delete",
+                  color: Colors.red,
+                  icon: Icons.delete,
+                  onTap: () {},
+                ),
+              ],
+              child: Card(
+                elevation: 8.0,
+                margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+                child: Container(
+                  child: ListTile(
+                    contentPadding:
+                    EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                    leading: Icon(Icons.restaurant_menu),
+                    title: Text(element['name']),
+                    trailing: IconButton(
+                      icon: Icon(Icons.remove_red_eye),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/recipe');
+                      },
+                    ),
                   ),
                 ),
               ),
