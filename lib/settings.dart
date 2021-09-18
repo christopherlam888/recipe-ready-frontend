@@ -5,9 +5,22 @@ class Settings extends StatefulWidget {
   _SettingsState createState() => _SettingsState();
 }
 
-bool _isSet = false;
-
 class _SettingsState extends State<Settings> {
+
+  bool _isVegetarian = false;
+  bool _isVegan = false;
+  bool _isTreeNutFree = false;
+  bool _isPeanutFree = false;
+  bool _isDairyFree = false;
+  bool _isHalal = false;
+
+  String yield = "1";
+  int yieldInt = 1;
+  String meals = "2";
+  int mealsInt = 2;
+  String days = "7";
+  int daysInt = 7;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,60 +44,60 @@ class _SettingsState extends State<Settings> {
               SwitchListTile(
                 title: Text("Vegetarian"),
                 activeColor: Colors.black,
-                value: _isSet,
+                value: _isVegetarian,
                 onChanged: (bool value){
                   setState(() {
-                    _isSet = value;
+                    _isVegetarian = value;
                   });
                 },
               ),
               SwitchListTile(
                 title: Text("Vegan"),
                 activeColor: Colors.black,
-                value: _isSet,
+                value: _isVegan,
                 onChanged: (bool value){
                   setState(() {
-                    _isSet = value;
+                    _isVegan = value;
                   });
                 },
               ),
               SwitchListTile(
                 title: Text("Tree Nut Free"),
                 activeColor: Colors.black,
-                value: _isSet,
+                value: _isTreeNutFree,
                 onChanged: (bool value){
                   setState(() {
-                    _isSet = value;
+                    _isTreeNutFree = value;
                   });
                 },
               ),
               SwitchListTile(
                 title: Text("Peanut Free"),
                 activeColor: Colors.black,
-                value: _isSet,
+                value: _isPeanutFree,
                 onChanged: (bool value){
                   setState(() {
-                    _isSet = value;
+                    _isPeanutFree = value;
                   });
                 },
               ),
               SwitchListTile(
                 title: Text("Dairy Free"),
                 activeColor: Colors.black,
-                value: _isSet,
+                value: _isDairyFree,
                 onChanged: (bool value){
                   setState(() {
-                    _isSet = value;
+                    _isDairyFree = value;
                   });
                 },
               ),
               SwitchListTile(
                 title: Text("Halal"),
                 activeColor: Colors.black,
-                value: _isSet,
+                value: _isHalal,
                 onChanged: (bool value){
                   setState(() {
-                    _isSet = value;
+                    _isHalal = value;
                   });
                 },
               ),
@@ -92,15 +105,113 @@ class _SettingsState extends State<Settings> {
                 "Meals",
                 style: TextStyle(fontSize: 20),
               ),
-              SwitchListTile(
-                title: Text("Test"),
-                activeColor: Colors.black,
-                value: _isSet,
-                onChanged: (bool value){
-                  setState(() {
-                    _isSet = value;
-                  });
-                },
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Servings",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    DropdownButton<String>(
+                      value: yield,
+                      icon: const Icon(Icons.arrow_downward),
+                      iconSize: 24,
+                      elevation: 16,
+                      style: const TextStyle(color: Colors.black),
+                      underline: Container(
+                        height: 2,
+                        color: Colors.black
+                      ),
+                      onChanged: (String newValue) {
+                        setState(() {
+                          yield = newValue;
+                          yieldInt = int.parse(newValue);
+                        });
+                      },
+                      items: <String>['1', '2', '3', '4', '5', '6', '7', '8']
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Meals Per Day",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    DropdownButton<String>(
+                      value: meals,
+                      icon: const Icon(Icons.arrow_downward),
+                      iconSize: 24,
+                      elevation: 16,
+                      style: const TextStyle(color: Colors.black),
+                      underline: Container(
+                          height: 2,
+                          color: Colors.black
+                      ),
+                      onChanged: (String newValue) {
+                        setState(() {
+                          meals = newValue;
+                          mealsInt = int.parse(newValue);
+                        });
+                      },
+                      items: <String>['1', '2', '3', '4', '5']
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Days To Plan",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    DropdownButton<String>(
+                      value: days,
+                      icon: const Icon(Icons.arrow_downward),
+                      iconSize: 24,
+                      elevation: 16,
+                      style: const TextStyle(color: Colors.black),
+                      underline: Container(
+                          height: 2,
+                          color: Colors.black
+                      ),
+                      onChanged: (String newValue) {
+                        setState(() {
+                          days = newValue;
+                          daysInt = int.parse(newValue);
+                        });
+                      },
+                      items: <String>['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14']
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
