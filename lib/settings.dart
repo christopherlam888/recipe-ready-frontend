@@ -124,9 +124,9 @@ class _SettingsState extends State<Settings> {
                         height: 2,
                         color: Colors.black
                       ),
-                      onChanged: (String newValue) {
+                      onChanged: (String? newValue) {
                         setState(() {
-                          yield = newValue;
+                          yield = newValue!;
                           yieldInt = int.parse(newValue);
                         });
                       },
@@ -160,9 +160,9 @@ class _SettingsState extends State<Settings> {
                           height: 2,
                           color: Colors.black
                       ),
-                      onChanged: (String newValue) {
+                      onChanged: (String? newValue) {
                         setState(() {
-                          meals = newValue;
+                          meals = newValue!;
                           mealsInt = int.parse(newValue);
                         });
                       },
@@ -196,9 +196,9 @@ class _SettingsState extends State<Settings> {
                           height: 2,
                           color: Colors.black
                       ),
-                      onChanged: (String newValue) {
+                      onChanged: (String? newValue) {
                         setState(() {
-                          days = newValue;
+                          days = newValue!;
                           daysInt = int.parse(newValue);
                         });
                       },

@@ -40,9 +40,9 @@ class _GroceriesState extends State<Groceries> {
                           value: _isSelected,
                           secondary: Icon(Icons.image),
                           controlAffinity: ListTileControlAffinity.leading,
-                          onChanged: (bool value) {
+                          onChanged: (bool? value) {
                             setState(() {
-                              _isSelected = value;
+                              _isSelected = value!;
                             });
                           },
                           activeColor: Colors.green,
