@@ -11,15 +11,15 @@ class _TodayState extends State<Today> {
     return Scaffold(
       backgroundColor: Color(0xffe6ffe6),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 75.0),
+        padding: const EdgeInsets.fromLTRB(10.0, 40.0, 10.0, 75.0),
         child: Container(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                "Today",
+                "Today's Recipes",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 10.0),
               Expanded(
@@ -34,7 +34,7 @@ class _TodayState extends State<Today> {
                         child: Column(
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Column(
                                   children: [

@@ -30,7 +30,7 @@ class _PlanState extends State<Plan> {
     return Scaffold(
       backgroundColor: Color(0xffe6ffe6),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(10.0, 25.0, 10.0, 75.0),
+        padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 75.0),
         child: GroupedListView<dynamic, String>(
           elements: _recipes,
           groupBy: (element) => element['group'],
