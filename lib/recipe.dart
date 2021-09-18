@@ -47,7 +47,7 @@ class _RecipeState extends State<Recipe> {
                     ),
                     Text(state.activeRecipe.name,
                         style: TextStyle(
-                          fontSize: 40.0,
+                          fontSize: 30.0,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         )),
@@ -61,7 +61,7 @@ class _RecipeState extends State<Recipe> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: Center(child: Icon(Icons.image)),
+                      child: Center(child: Image.network('https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg')),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
