@@ -13,26 +13,50 @@ class _NavState extends State<Nav> {
 
   int _selectedIndex = 0;
 
-  List<Widget> _widgetOptions = <Widget>[
-    Plan(),
-    Today(),
-    Groceries(),
-    Settings(),
-  ];
 
   void _onItemTap(int index) {
     setState(() {
       _selectedIndex = index;
+      pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.ease);
     });
+  }
+
+  PageController pageController = PageController(
+    initialPage: 0,
+    keepPage: true,
+  );
+
+  void pageChanged(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  Widget buildPageView() {
+    return PageView(
+      controller: pageController,
+      onPageChanged: (index){
+        pageChanged(index);
+      },
+      children: <Widget>[
+        Plan(),
+        Today(),
+        Groceries(),
+        Settings(),
+      ],
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.green,
-      body: Center(
-          child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: buildPageView(),
       bottomNavigationBar: BottomNavigationBar(
         iconSize: 35,
         type: BottomNavigationBarType.fixed,
@@ -56,7 +80,9 @@ class _NavState extends State<Nav> {
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.green,
-        onTap: _onItemTap,
+        onTap: (index) {
+          _onItemTap(index);
+        },
       ),
     );
   }
