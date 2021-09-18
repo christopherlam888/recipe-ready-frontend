@@ -11,37 +11,38 @@ part 'state.g.dart';
 @JsonSerializable()
 class Recipe {
   Recipe(
-      this.id,
-      this.name,
-      this.imageLink,
-      this.prepTime,
-      this.yield,
-      this.description,
-      this.ingredients,
-      this.steps,
-      this.vegan,
-      this.vegetarian,
-      this.halal,
-      this.noTreenuts,
-      this.noPeanuts,
-      this.noDairy);
+    this.id,
+    this.name,
+    this.imageLink,
+    this.prepTime,
+    this.yield,
+    this.description,
+    this.ingredients,
+    this.steps,
+    this.vegan,
+    this.vegetarian,
+    this.halal,
+    this.noTreenuts,
+    this.noPeanuts,
+    this.noDairy,
+  );
 
   @JsonKey(required: true)
-  final int id;
+  final String id;
 
   @JsonKey(required: true)
   final String name;
 
   @JsonKey(name: "imglink")
-  final String imageLink;
+  final String? imageLink;
 
   @JsonKey(name: "prep_time")
-  final int prepTime;
-  final int yield;
-  final String description;
+  final int? prepTime;
+  final int? yield;
+  final String? description;
   final Map<String, dynamic> ingredients;
 
-  final List<String> steps;
+  final List<String>? steps;
   final bool vegan;
   final bool vegetarian;
   final bool halal;
@@ -53,13 +54,18 @@ class Recipe {
   @JsonKey(name: "dairy_free")
   final bool noDairy;
 
+  @JsonKey(ignore: true)
+  DateTime date = DateTime(2000, 01, 01);
+
+  int compareTo(Recipe other) => this.date.compareTo(other.date);
+
   factory Recipe.fromJson(Map<String, dynamic> json) => _$RecipeFromJson(json);
 }
 
 class StateTracker extends ChangeNotifier {
   static final String ROOT_URL = "https://api.eggworld.tk/recipes/";
   final List<Recipe> _recipes = [];
-  UnmodifiableListView<Recipe> get recipes => UnmodifiableListView(_recipes);
+  List<Recipe> get recipes => _recipes;
 
   // settings
   int _numPeople = 1;
@@ -79,6 +85,10 @@ class StateTracker extends ChangeNotifier {
   bool get noDairy => _noDairy;
   bool get noTreenuts => _noTreenuts;
   bool get noPeanuts => _noPeanuts;
+
+  StateTracker() {
+    fetchMoreRecipes();
+  }
 
   void addRecipe(Recipe recipe) {
     _recipes.add(recipe);
@@ -100,6 +110,7 @@ class StateTracker extends ChangeNotifier {
     final response = await http.get(Uri.parse(
         "$ROOT_URL?limit=$numPeople&vegan=$vegan&vegetarian=$vegetarian&halal=$halal&no_tree_nuts=$noTreenuts&no_dairy=$noDairy&no_peanuts=$noPeanuts"));
     if (response.statusCode == 200) {
+      // TODO: do date processing
       _recipes.addAll((jsonDecode(response.body) as List)
           .map((i) => Recipe.fromJson(i))
           .toList());
