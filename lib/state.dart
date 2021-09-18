@@ -67,6 +67,10 @@ class StateTracker extends ChangeNotifier {
   final List<Recipe> _recipes = [];
   List<Recipe> get recipes => _recipes;
 
+  // state
+  Recipe activeRecipe = Recipe("demo", "demo", "demo", 1, 1, "demo",
+      {"demo": 1}, [], false, false, false, false, false, false);
+
   // settings
   int _numPeople = 1;
   int _mealsPerDay = 2;
