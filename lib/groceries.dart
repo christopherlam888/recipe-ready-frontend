@@ -6,6 +6,9 @@ class Groceries extends StatefulWidget {
 }
 
 class _GroceriesState extends State<Groceries> {
+
+  bool _isSelected = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,13 +23,31 @@ class _GroceriesState extends State<Groceries> {
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
+              SizedBox(height: 10.0),
               Expanded(
                 child: ListView.builder(
                   itemCount: 20,
                   itemBuilder: (context, index){
                     return Card(
-                      color: Colors.white,
-                      child: Text("Groceries"),
+                      elevation: 8.0,
+                      margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+                      child: Container(
+                        child: CheckboxListTile(
+                          contentPadding:
+                          EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                          title: Text('Groceries'),
+                          value: _isSelected,
+                          secondary: Icon(Icons.image),
+                          controlAffinity: ListTileControlAffinity.leading,
+                          onChanged: (bool value) {
+                            setState(() {
+                              _isSelected = value;
+                            });
+                          },
+                          activeColor: Colors.green,
+                          checkColor: Colors.white,
+                        ),
+                      ),
                     );
                   },
                 ),
