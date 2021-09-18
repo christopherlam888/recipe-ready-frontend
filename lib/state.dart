@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'state.g.dart';
@@ -69,6 +70,10 @@ class StateTracker extends ChangeNotifier {
 
   int get numPeople => _numPeople;
   int get mealsPerDay => _mealsPerDay;
+  bool get vegan => _vegan;
+  bool get noDairy => _noDairy;
+  bool get noTreenuts => _noTreenuts;
+  bool get noPeanuts => _noPeanuts;
 
   void addRecipe(Recipe recipe) {
     _recipes.add(recipe);
@@ -86,3 +91,5 @@ class StateTracker extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+class 
