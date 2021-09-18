@@ -83,6 +83,7 @@ class _PlanState extends State<Plan> {
                       trailing: IconButton(
                         icon: Icon(Icons.remove_red_eye),
                         onPressed: () {
+                          state.activeRecipe = element;
                           Navigator.pushNamed(context, '/recipe');
                         },
                       ),

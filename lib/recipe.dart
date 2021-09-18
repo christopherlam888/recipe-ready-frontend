@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:recipe_ready/state.dart';
 
 class Recipe extends StatefulWidget {
   @override
@@ -26,75 +28,68 @@ class _RecipeState extends State<Recipe> {
             ],
           ),
           child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+              padding: const EdgeInsets.all(15.0),
+              child: Consumer<StateTracker>(builder: (context, state, child) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    IconButton(
-                      alignment: Alignment.topRight,
-                      icon: Icon(Icons.close),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                          alignment: Alignment.topRight,
+                          icon: Icon(Icons.close),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                Text(
-                    "Recipe",
-                    style: TextStyle(
-                      fontSize: 36.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    )
-                ),
-                SizedBox(height: 5.0),
-                Text(
-                  "Description of recipe...",
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.black,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Center(child: Icon(Icons.image)),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(Icons.timer),
-                    Text("Time"),
-                    Icon(Icons.local_pizza),
-                    Text("Yield"),
-                  ],
-                ),
-                SizedBox(height: 5.0),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Text(
-                      "Ingredients",
+                    Text(state.activeRecipe.name,
+                        style: TextStyle(
+                          fontSize: 40.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        )),
+                    SizedBox(height: 5.0),
+                    Text(
+                      state.activeRecipe.description ?? "",
                       style: TextStyle(
                         fontSize: 20.0,
                         color: Colors.black,
-                      )
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Text(
-                      "Procedure",
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        color: Colors.black,
-                      )
-                  ),
-                ),
-              ],
-            ),
-          ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: Center(child: Icon(Icons.image)),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Icon(Icons.timer),
+                        Text(
+                            "${state.activeRecipe.prepTime?.toString()} min(s)"),
+                        Icon(Icons.local_pizza),
+                        // TODO: hide them if they are null
+                        Text(
+                            "${state.activeRecipe.yield?.toString()} serving(s)"),
+                      ],
+                    ),
+                    SizedBox(height: 5.0),
+                    Text("Ingredients",
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.black,
+                        )),
+                    SizedBox(height: 5.0),
+                    Text("Procedure",
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.black,
+                        )),
+                  ],
+                );
+              })),
         ),
       ),
     );
