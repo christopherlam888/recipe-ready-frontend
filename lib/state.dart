@@ -168,6 +168,8 @@ class StateTracker extends ChangeNotifier {
 
   void clearRecipes() {
     _recipes.clear();
+    _groceries.clear();
+    notifyListeners();
   }
 
   void fetchMoreRecipes() async {
