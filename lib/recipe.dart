@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_ready/state.dart';
@@ -8,18 +9,13 @@ class Recipe extends StatefulWidget {
 }
 
 class _RecipeState extends State<Recipe> {
-
   List<String> ingredients = [
     "Old shoes",
     "Horse manure",
     "Chemistry textbooks"
   ];
 
-  List<String> steps = [
-    "Pour this.",
-    "Mix that.",
-    "Eat everything!"
-  ];
+  List<String> steps = ["Pour this.", "Mix that.", "Eat everything!"];
 
   @override
   Widget build(BuildContext context) {
@@ -75,14 +71,20 @@ class _RecipeState extends State<Recipe> {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: Center(child: Image.network('https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg')),
+                        child: Center(
+                            child: CachedNetworkImage(
+                                imageUrl: state.activeRecipe.imageLink ?? "",
+                                placeholder: (context, url) =>
+                                    CircularProgressIndicator(),
+                                errorWidget: (context, url, error) =>
+                                    Icon(Icons.error))),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Icon(Icons.timer),
                           Text(
-                              "${state.activeRecipe.prepTime?.toString()} min(s)"),
+                              "${state.activeRecipe.prepTime?.toString()} min"),
                           Icon(Icons.local_pizza),
                           // TODO: hide them if they are null
                           Text(
@@ -99,7 +101,10 @@ class _RecipeState extends State<Recipe> {
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: ingredients.map((ingredient) => Text("• " + ingredient, style: TextStyle(fontSize: 16.0))).toList(),
+                        children: ingredients
+                            .map((ingredient) => Text("• " + ingredient,
+                                style: TextStyle(fontSize: 16.0)))
+                            .toList(),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -111,7 +116,10 @@ class _RecipeState extends State<Recipe> {
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: steps.map((step) => Text("• " + step, style: TextStyle(fontSize: 16.0))).toList(),
+                        children: steps
+                            .map((step) => Text("• " + step,
+                                style: TextStyle(fontSize: 16.0)))
+                            .toList(),
                       ),
                     ],
                   ),

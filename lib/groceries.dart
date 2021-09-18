@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_ready/state.dart';
@@ -8,8 +9,6 @@ class Groceries extends StatefulWidget {
 }
 
 class _GroceriesState extends State<Groceries> {
-  bool _isSelected = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +21,7 @@ class _GroceriesState extends State<Groceries> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  "Day 1 - Day 7",
+                  "Next ${state.mealsPerDay} day(s)",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
@@ -43,7 +42,15 @@ class _GroceriesState extends State<Groceries> {
                                 "${num.tryParse(state.groceries.values.elementAt(index).quantity?.toStringAsFixed(2) ?? "") ?? ""} ${state.groceries.values.elementAt(index).unit ?? ""} ${state.groceries.keys.elementAt(index)}"),
                             value:
                                 state.groceries.values.elementAt(index).checked,
-                            secondary: Icon(Icons.image),
+                            secondary: CachedNetworkImage(
+                              imageUrl: state.groceries.values
+                                  .elementAt(index)
+                                  .imageLink,
+                              placeholder: (context, url) =>
+                                  CircularProgressIndicator(),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
+                            ),
                             controlAffinity: ListTileControlAffinity.leading,
                             onChanged: (bool? value) {
                               setState(() {
