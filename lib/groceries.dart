@@ -29,7 +29,7 @@ class _GroceriesState extends State<Groceries> {
                 SizedBox(height: 10.0),
                 Expanded(
                   child: ListView.builder(
-                    itemCount: 20,
+                    itemCount: state.groceries.length,
                     itemBuilder: (context, index) {
                       return Card(
                         elevation: 8.0,
@@ -39,13 +39,17 @@ class _GroceriesState extends State<Groceries> {
                           child: CheckboxListTile(
                             contentPadding: EdgeInsets.symmetric(
                                 horizontal: 20.0, vertical: 10.0),
-                            title: Text('Groceries'),
-                            value: _isSelected,
+                            title: Text(
+                                "${num.tryParse(state.groceries.values.elementAt(index).quantity?.toStringAsFixed(2) ?? "") ?? ""} ${state.groceries.values.elementAt(index).unit ?? ""} ${state.groceries.keys.elementAt(index)}"),
+                            value:
+                                state.groceries.values.elementAt(index).checked,
                             secondary: Icon(Icons.image),
                             controlAffinity: ListTileControlAffinity.leading,
                             onChanged: (bool? value) {
                               setState(() {
-                                _isSelected = value!;
+                                state.groceries.values
+                                    .elementAt(index)
+                                    .checked = value!;
                               });
                             },
                             activeColor: Colors.green,

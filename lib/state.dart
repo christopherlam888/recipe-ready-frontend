@@ -129,6 +129,7 @@ class StateTracker extends ChangeNotifier {
     // if i in groceries increment the number and replace the unit
     // otherwise make a new one with all the metadata
     recipe.ingredients.forEach((i, d) {
+      _groceries[i]?.checked = false;
       if (_groceries.containsKey(i)) {
         // add quantity
         final quantity = _groceries[i]?.quantity ?? 0;
@@ -177,10 +178,12 @@ class StateTracker extends ChangeNotifier {
         "$ROOT_URL?limit=$numPeople&vegan=$vegan&vegetarian=$vegetarian&halal=$halal&no_tree_nuts=$noTreenuts&no_dairy=$noDairy&no_peanuts=$noPeanuts"));
     if (response.statusCode == 200) {
       // TODO: do date processing
-      _recipes.addAll((jsonDecode(response.body) as List)
+      (jsonDecode(response.body) as List)
           .map((i) => Recipe.fromJson(i))
-          .toList());
-      notifyListeners();
+          .toList()
+          .forEach((recipe) {
+        addRecipe(recipe);
+      });
     } else {
       throw Exception("Failed to get new recipes.");
     }
