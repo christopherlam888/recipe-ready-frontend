@@ -1,8 +1,9 @@
 import 'dart:collection';
+import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
 
 part 'state.g.dart';
@@ -56,6 +57,7 @@ class Recipe {
 }
 
 class StateTracker extends ChangeNotifier {
+  static final String ROOT_URL = "https://api.eggworld.tk/recipes/";
   final List<Recipe> _recipes = [];
   UnmodifiableListView<Recipe> get recipes => UnmodifiableListView(_recipes);
 
@@ -67,10 +69,13 @@ class StateTracker extends ChangeNotifier {
   bool _noDairy = false;
   bool _noTreenuts = false;
   bool _noPeanuts = false;
+  bool _halal = false;
 
   int get numPeople => _numPeople;
   int get mealsPerDay => _mealsPerDay;
   bool get vegan => _vegan;
+  bool get vegetarian => _vegetarian;
+  bool get halal => _halal;
   bool get noDairy => _noDairy;
   bool get noTreenuts => _noTreenuts;
   bool get noPeanuts => _noPeanuts;
@@ -90,12 +95,17 @@ class StateTracker extends ChangeNotifier {
     _recipes.insert(index, recipe);
     notifyListeners();
   }
-}
 
-class ServerRequest {
-  static final String ROOT_URL = "https://api.eggworld.tk/recipes/";
-
-  Future<http.Response> fetchRecipes() {
-    return http.get(ROOT_URL + "?limit=14");
+  void fetchMoreRecipes() async {
+    final response = await http.get(Uri.parse(
+        "$ROOT_URL?limit=$numPeople&vegan=$vegan&vegetarian=$vegetarian&halal=$halal&no_tree_nuts=$noTreenuts&no_dairy=$noDairy&no_peanuts=$noPeanuts"));
+    if (response.statusCode == 200) {
+      _recipes.addAll((jsonDecode(response.body) as List)
+          .map((i) => Recipe.fromJson(i))
+          .toList());
+      notifyListeners();
+    } else {
+      throw Exception("Failed to get new recipes.");
+    }
   }
 }
