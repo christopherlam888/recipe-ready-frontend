@@ -42,6 +42,43 @@ class _RecipeState extends State<Recipe> {
                       color: Colors.black,
                     )
                 ),
+                SizedBox(height: 5.0),
+                Text(
+                  "Description of recipe...",
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.black,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: Center(child: Icon(Icons.image)),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Icon(Icons.timer),
+                    Text("Time"),
+                    Icon(Icons.local_pizza),
+                    Text("Yield"),
+                  ],
+                ),
+                SizedBox(height: 5.0),
+                Text(
+                    "Ingredients",
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.black,
+                    )
+                ),
+                SizedBox(height: 5.0),
+                Text(
+                    "Procedure",
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.black,
+                    )
+                ),
               ],
             ),
           ),
