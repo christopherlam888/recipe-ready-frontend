@@ -11,10 +11,10 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffb3ffb3),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 75.0),
+          padding: const EdgeInsets.fromLTRB(10.0, 40.0, 10.0, 75.0),
           child: Container(
             child: Consumer<StateTracker>(builder: (context, state, child) {
               return Column(

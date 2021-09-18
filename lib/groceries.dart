@@ -14,7 +14,7 @@ class _GroceriesState extends State<Groceries> {
     return Scaffold(
       backgroundColor: Color(0xffe6ffe6),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 75.0),
+        padding: const EdgeInsets.fromLTRB(10.0, 40.0, 10.0, 75.0),
         child: Container(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -22,7 +22,7 @@ class _GroceriesState extends State<Groceries> {
               Text(
                 "Day 1 - Day 7",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 10.0),
               Expanded(
@@ -59,15 +59,15 @@ class _GroceriesState extends State<Groceries> {
       ),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () {},
-          backgroundColor: Colors.pink,
+          backgroundColor: Color(0xff990000),
           icon: Icon(
             Icons.clear,
-            color: Colors.black,
+            color: Colors.white,
           ),
           label: Text(
             "Reset All",
             style: TextStyle(
-              color: Colors.black,
+              color: Colors.white,
             ),
           )
       ),
