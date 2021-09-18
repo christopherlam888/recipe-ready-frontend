@@ -9,13 +9,13 @@ class _RecipeState extends State<Recipe> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green,
+      backgroundColor: Color(0xffe6ffe6),
       body: Padding(
-        padding: const EdgeInsets.all(30.0),
+        padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
         child: Container(
           decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(20))
+              borderRadius: BorderRadius.all(Radius.circular(20)),
           ),
           child: Padding(
             padding: const EdgeInsets.all(15.0),

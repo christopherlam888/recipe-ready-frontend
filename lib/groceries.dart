@@ -12,7 +12,7 @@ class _GroceriesState extends State<Groceries> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green,
+      backgroundColor: Color(0xffe6ffe6),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 75.0),
         child: Container(
