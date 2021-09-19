@@ -17,7 +17,10 @@ class _RecipeState extends State<Recipe> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffe6ffe6),
+      // aw yeah super long code
+      backgroundColor: Provider.of<StateTracker>(context, listen: true).darkMode
+          ? Colors.black
+          : Color(0xffe6ffe6),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
         child: Container(
@@ -117,12 +120,12 @@ class _RecipeState extends State<Recipe> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: state.activeRecipe.steps!
                             .map((step) => Column(
-                              children: [
-                                Text("• " + step,
-                                    style: TextStyle(fontSize: 16.0)),
-                                SizedBox(height: 10.0),
-                              ],
-                            ))
+                                  children: [
+                                    Text("• " + step,
+                                        style: TextStyle(fontSize: 16.0)),
+                                    SizedBox(height: 10.0),
+                                  ],
+                                ))
                             .toList(),
                       ),
                     ],

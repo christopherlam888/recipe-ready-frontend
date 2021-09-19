@@ -16,7 +16,9 @@ class _PlanState extends State<Plan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffe6ffe6),
+      backgroundColor: Provider.of<StateTracker>(context, listen: true).darkMode
+          ? Colors.black87
+          : Colors.white,
       body: Padding(
         padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 75.0),
         child: Consumer<StateTracker>(builder: (context, state, child) {
@@ -32,7 +34,10 @@ class _PlanState extends State<Plan> {
               child: Text(
                 value,
                 textAlign: TextAlign.left,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: state.darkMode ? Colors.white : Colors.black),
               ),
             ),
             itemBuilder: (c, element) {

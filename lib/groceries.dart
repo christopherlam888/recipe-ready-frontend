@@ -11,9 +11,12 @@ class Groceries extends StatefulWidget {
 class _GroceriesState extends State<Groceries> {
   @override
   Widget build(BuildContext context) {
-    if (Provider.of<StateTracker>(context, listen: false).recipes.length == 0){
+    if (Provider.of<StateTracker>(context, listen: false).recipes.length == 0) {
       return Scaffold(
-          backgroundColor: Color(0xffe6ffe6),
+          backgroundColor:
+              Provider.of<StateTracker>(context, listen: false).darkMode
+                  ? Colors.black
+                  : Colors.white,
           body: Padding(
             padding: const EdgeInsets.all(40.0),
             child: Column(
@@ -37,11 +40,13 @@ class _GroceriesState extends State<Groceries> {
                 ),
               ],
             ),
-          )
-      );
+          ));
     } else {
       return Scaffold(
-        backgroundColor: Color(0xffe6ffe6),
+        backgroundColor:
+            Provider.of<StateTracker>(context, listen: false).darkMode
+                ? Colors.black
+                : Colors.white,
         body: Padding(
           padding: const EdgeInsets.fromLTRB(10.0, 40.0, 10.0, 75.0),
           child: Container(
@@ -50,9 +55,12 @@ class _GroceriesState extends State<Groceries> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    "Next ${state.mealsPerDay} day(s)",
+                    "Next ${state.numDaysPlanned} day(s)",
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: state.darkMode ? Colors.white : Colors.black),
                   ),
                   SizedBox(height: 10.0),
                   Expanded(
@@ -61,6 +69,7 @@ class _GroceriesState extends State<Groceries> {
                       itemBuilder: (context, index) {
                         return Card(
                           elevation: 8.0,
+                          color: Colors.white,
                           margin: new EdgeInsets.symmetric(
                               horizontal: 10.0, vertical: 6.0),
                           child: Container(
@@ -68,16 +77,8 @@ class _GroceriesState extends State<Groceries> {
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 20.0, vertical: 10.0),
                               title: Text(
-                                  "${num.tryParse(state.groceries.values
-                                      .elementAt(index)
-                                      .quantity
-                                      ?.toStringAsFixed(1) ?? "") ?? ""} ${state
-                                      .groceries.values
-                                      .elementAt(index)
-                                      .unit ?? ""} ${state.groceries.keys
-                                      .elementAt(index)}"),
-                              value:
-                              state.groceries.values
+                                  "${num.tryParse(state.groceries.values.elementAt(index).quantity?.toStringAsFixed(1) ?? "") ?? ""} ${state.groceries.values.elementAt(index).unit ?? ""} ${state.groceries.keys.elementAt(index)}"),
+                              value: state.groceries.values
                                   .elementAt(index)
                                   .checked,
                               secondary: CachedNetworkImage(

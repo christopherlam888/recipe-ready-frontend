@@ -121,10 +121,7 @@ class StateTracker extends ChangeNotifier {
   bool noTreenuts = false;
   bool noPeanuts = false;
   bool halal = false;
-
-  StateTracker() {
-    fetchMoreRecipes();
-  }
+  bool darkMode = true;
 
   void addRecipe(Recipe recipe) {
     _recipes.add(recipe);
@@ -189,7 +186,7 @@ class StateTracker extends ChangeNotifier {
     final now = DateTime.now();
     for (int i = 0; i < newRecipes.length; i++) {
       int offset = 0;
-      if ((i + 1) % mealsPerDay == 0) offset++;
+      if ((i + 1) % numDaysPlanned == 0) offset++;
       newRecipes[i].date = DateTime(now.year, now.month, now.day + offset);
       addRecipe(newRecipes[i]);
     }

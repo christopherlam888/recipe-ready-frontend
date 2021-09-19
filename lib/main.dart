@@ -11,12 +11,18 @@ import 'package:recipe_ready/recipe.dart';
 void main() {
   runApp(ChangeNotifierProvider(
       create: (context) => state.StateTracker(),
-      child: MaterialApp(initialRoute: '/nav', routes: {
-        '/nav': (context) => Nav(),
-        '/plan': (context) => Plan(),
-        '/today': (context) => Today(),
-        '/groceries': (context) => Groceries(),
-        '/settings': (context) => Settings(),
-        '/recipe': (context) => Recipe(),
-      })));
+      child: MaterialApp(
+        initialRoute: '/nav',
+        routes: {
+          '/nav': (context) => Nav(),
+          '/plan': (context) => Plan(),
+          '/today': (context) => Today(),
+          '/groceries': (context) => Groceries(),
+          '/settings': (context) => Settings(),
+          '/recipe': (context) => Recipe(),
+        },
+        theme: ThemeData.light(),
+        darkTheme: ThemeData.dark(),
+        themeMode: ThemeMode.system,
+      )));
 }
