@@ -58,19 +58,28 @@ class _PlanState extends State<Plan> {
                   margin:
                       new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
                   child: Container(
-                    child: ListTile(
-                      contentPadding: EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 10.0),
-                      leading: Icon(Icons.restaurant_menu),
-                      title: Text(element.name),
-                      trailing: IconButton(
-                        icon: Icon(Icons.remove_red_eye),
-                        onPressed: () {
-                          state.activeRecipe = element;
-                          Navigator.pushNamed(context, '/recipe');
-                        },
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.dstATop),
+                          image: NetworkImage(element.imageLink),
+                          fit: BoxFit.fitWidth,
+                          alignment: Alignment.topCenter,
                       ),
                     ),
+                    child:
+                      ListTile(
+                        contentPadding: EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 10.0),
+                        leading: Icon(Icons.restaurant_menu),
+                        title: Text(element.name),
+                        trailing: IconButton(
+                          icon: Icon(Icons.remove_red_eye),
+                          onPressed: () {
+                            state.activeRecipe = element;
+                            Navigator.pushNamed(context, '/recipe');
+                          },
+                        ),
+                      ),
                   ),
                 ),
               );
