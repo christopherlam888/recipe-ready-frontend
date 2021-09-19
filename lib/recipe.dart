@@ -103,7 +103,12 @@ class _RecipeState extends State<Recipe> {
                                   state.darkMode ? Colors.white : Colors.black),
                           // TODO: hide them if they are null
                           Text(
-                              "${state.activeRecipe.yield?.toString()} serving(s)"),
+                            "${state.activeRecipe.yield?.toString()} serving(s)",
+                            style: TextStyle(
+                                color: state.darkMode
+                                    ? Colors.white
+                                    : Colors.black),
+                          ),
                         ],
                       ),
                       Padding(

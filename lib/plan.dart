@@ -76,7 +76,7 @@ class _PlanState extends State<Plan> {
         backgroundColor:
             Provider.of<StateTracker>(context, listen: true).darkMode
                 ? Colors.black87
-                : Colors.white,
+                : Color(0xffe6ffe6),
         body: Padding(
           padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 75.0),
           child: Consumer<StateTracker>(builder: (context, state, child) {
