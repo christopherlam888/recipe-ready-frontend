@@ -62,7 +62,7 @@ class _GroceriesState extends State<Groceries> {
                 ? Colors.black
                 : Colors.white,
         body: Padding(
-          padding: const EdgeInsets.fromLTRB(10.0, 40.0, 10.0, 75.0),
+          padding: const EdgeInsets.fromLTRB(10.0, 40.0, 10.0, 0),
           child: Container(
             child: Consumer<StateTracker>(builder: (context, state, child) {
               return Column(
@@ -87,49 +87,55 @@ class _GroceriesState extends State<Groceries> {
                           margin: new EdgeInsets.symmetric(
                               horizontal: 10.0, vertical: 6.0),
                           child: Container(
-                            child: CheckboxListTile(
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 20.0, vertical: 10.0),
-                              title: Column(
-                                children: [
-                                  if (state.groceries.values
-                                          .elementAt(index)
-                                          .quantity ==
-                                      0) ...[
-                                    Text(
-                                        "${state.groceries.keys.elementAt(index)}",
-                                        style: TextStyle(
-                                            fontSize: 16.0,
-                                            color: Colors.black)),
-                                  ] else ...[
-                                    Text(
-                                        "${num.tryParse(state.groceries.values.elementAt(index).quantity?.toStringAsFixed(1) ?? "") ?? ""} ${state.groceries.values.elementAt(index).unit ?? ""} ${state.groceries.keys.elementAt(index)}",
-                                        style: TextStyle(color: Colors.black)),
-                                  ]
-                                ],
-                              ),
-                              value: state.groceries.values
-                                  .elementAt(index)
-                                  .checked,
-                              secondary: CachedNetworkImage(
-                                imageUrl: state.groceries.values
+                            child: Theme(
+                              data: ThemeData(
+                                  unselectedWidgetColor: Colors.black54),
+                              child: CheckboxListTile(
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 20.0, vertical: 10.0),
+                                title: Column(
+                                  children: [
+                                    if (state.groceries.values
+                                            .elementAt(index)
+                                            .quantity ==
+                                        0) ...[
+                                      Text(
+                                          "${state.groceries.keys.elementAt(index)}",
+                                          style: TextStyle(
+                                              fontSize: 16.0,
+                                              color: Colors.black)),
+                                    ] else ...[
+                                      Text(
+                                          "${num.tryParse(state.groceries.values.elementAt(index).quantity?.toStringAsFixed(1) ?? "") ?? ""} ${state.groceries.values.elementAt(index).unit ?? ""} ${state.groceries.keys.elementAt(index)}",
+                                          style:
+                                              TextStyle(color: Colors.black)),
+                                    ]
+                                  ],
+                                ),
+                                value: state.groceries.values
                                     .elementAt(index)
-                                    .imageLink,
-                                placeholder: (context, url) =>
-                                    CircularProgressIndicator(),
-                                errorWidget: (context, url, error) =>
-                                    Icon(Icons.error),
-                              ),
-                              controlAffinity: ListTileControlAffinity.leading,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  state.groceries.values
+                                    .checked,
+                                secondary: CachedNetworkImage(
+                                  imageUrl: state.groceries.values
                                       .elementAt(index)
-                                      .checked = value!;
-                                });
-                              },
-                              activeColor: Colors.green,
-                              checkColor: Colors.white,
+                                      .imageLink,
+                                  placeholder: (context, url) =>
+                                      CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
+                                ),
+                                controlAffinity:
+                                    ListTileControlAffinity.leading,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    state.groceries.values
+                                        .elementAt(index)
+                                        .checked = value!;
+                                  });
+                                },
+                                activeColor: Colors.green,
+                                checkColor: Colors.white,
+                              ),
                             ),
                           ),
                         );
@@ -156,7 +162,6 @@ class _GroceriesState extends State<Groceries> {
                 color: Colors.white,
               ),
             )),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       );
     }
   }

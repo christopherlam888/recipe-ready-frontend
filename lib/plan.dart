@@ -83,7 +83,7 @@ class _PlanState extends State<Plan> {
                 ? Colors.black87
                 : Color(0xffe6ffe6),
         body: Padding(
-          padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 75.0),
+          padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0.0),
           child: Consumer<StateTracker>(builder: (context, state, child) {
             return GroupedListView<dynamic, String>(
               elements: state.recipes,

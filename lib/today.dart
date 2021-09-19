@@ -60,7 +60,7 @@ class _TodayState extends State<Today> {
                 ? Colors.black
                 : Colors.white,
         body: Padding(
-          padding: const EdgeInsets.fromLTRB(10.0, 40.0, 10.0, 75.0),
+          padding: const EdgeInsets.fromLTRB(10.0, 40.0, 10.0, 0.0),
           child: Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,

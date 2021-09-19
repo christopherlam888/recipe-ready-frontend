@@ -21,8 +21,5 @@ void main() {
           '/settings': (context) => Settings(),
           '/recipe': (context) => Recipe(),
         },
-        theme: ThemeData.light(),
-        darkTheme: ThemeData.dark(),
-        themeMode: ThemeMode.system,
       )));
 }
