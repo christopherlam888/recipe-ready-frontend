@@ -28,6 +28,10 @@ class _GroceriesState extends State<Groceries> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 22,
+                    color: Provider.of<StateTracker>(context, listen: false)
+                            .darkMode
+                        ? Colors.white
+                        : Colors.black,
                   ),
                 ),
                 SizedBox(height: 20.0),
@@ -36,6 +40,10 @@ class _GroceriesState extends State<Groceries> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 22,
+                    color: Provider.of<StateTracker>(context, listen: false)
+                            .darkMode
+                        ? Colors.white
+                        : Colors.black,
                   ),
                 ),
               ],
@@ -78,28 +86,20 @@ class _GroceriesState extends State<Groceries> {
                                   horizontal: 20.0, vertical: 10.0),
                               title: Column(
                                 children: [
-                                  if(state.groceries.values
-                                      .elementAt(index)
-                                      .quantity == 0) ...[
+                                  if (state.groceries.values
+                                          .elementAt(index)
+                                          .quantity ==
+                                      0) ...[
                                     Text(
-                                        "${state.groceries.keys
-                                            .elementAt(index)}",
+                                        "${state.groceries.keys.elementAt(index)}",
                                         style: TextStyle(fontSize: 16.0)),
                                   ] else ...[
                                     Text(
-                                        "${num.tryParse(state.groceries.values
-                                            .elementAt(index)
-                                            .quantity
-                                            ?.toStringAsFixed(1) ?? "") ?? ""} ${state
-                                            .groceries.values
-                                            .elementAt(index)
-                                            .unit ?? ""} ${state.groceries.keys
-                                            .elementAt(index)}"),
+                                        "${num.tryParse(state.groceries.values.elementAt(index).quantity?.toStringAsFixed(1) ?? "") ?? ""} ${state.groceries.values.elementAt(index).unit ?? ""} ${state.groceries.keys.elementAt(index)}"),
                                   ]
                                 ],
                               ),
-                              value:
-                              state.groceries.values
+                              value: state.groceries.values
                                   .elementAt(index)
                                   .checked,
                               secondary: CachedNetworkImage(

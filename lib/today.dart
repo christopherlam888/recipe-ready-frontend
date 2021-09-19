@@ -28,6 +28,7 @@ class _TodayState extends State<Today> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 22,
+                    color: Provider.of<StateTracker>(context, listen: false).darkMode ? Colors.white : Colors.black
                   ),
                 ),
                 SizedBox(height: 20.0),
@@ -36,6 +37,7 @@ class _TodayState extends State<Today> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 22,
+                    color: Provider.of<StateTracker>(context, listen: false).darkMode ? Colors.white : Colors.black
                   ),
                 ),
               ],
