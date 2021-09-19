@@ -20,12 +20,14 @@ class _RecipeState extends State<Recipe> {
       // aw yeah super long code
       backgroundColor: Provider.of<StateTracker>(context, listen: true).darkMode
           ? Colors.black
-          : Color(0xffe6ffe6),
+          : Colors.grey.shade700,
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Provider.of<StateTracker>(context, listen: true).darkMode
+                ? Colors.grey.shade700
+                : Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(20)),
             boxShadow: [
               BoxShadow(
@@ -48,7 +50,10 @@ class _RecipeState extends State<Recipe> {
                         children: [
                           IconButton(
                             alignment: Alignment.topRight,
-                            icon: Icon(Icons.close),
+                            icon: Icon(Icons.close,
+                                color: state.darkMode
+                                    ? Colors.white
+                                    : Colors.black),
                             onPressed: () {
                               Navigator.pop(context);
                             },
@@ -59,15 +64,15 @@ class _RecipeState extends State<Recipe> {
                           style: TextStyle(
                             fontSize: 30.0,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                            color: state.darkMode ? Colors.white : Colors.black,
                           )),
                       SizedBox(height: 5.0),
                       Text(
                         state.activeRecipe.description ?? "",
                         style: TextStyle(
-                          fontSize: 20.0,
-                          color: Colors.black,
-                        ),
+                            fontSize: 20.0,
+                            color:
+                                state.darkMode ? Colors.white : Colors.black),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -83,10 +88,19 @@ class _RecipeState extends State<Recipe> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Icon(Icons.timer),
+                          Icon(Icons.timer,
+                              color:
+                                  state.darkMode ? Colors.white : Colors.black),
                           Text(
-                              "${state.activeRecipe.prepTime?.toString()} min"),
-                          Icon(Icons.local_pizza),
+                            "${state.activeRecipe.prepTime?.toString()} min",
+                            style: TextStyle(
+                                color: state.darkMode
+                                    ? Colors.white
+                                    : Colors.black),
+                          ),
+                          Icon(Icons.local_pizza,
+                              color:
+                                  state.darkMode ? Colors.white : Colors.black),
                           // TODO: hide them if they are null
                           Text(
                               "${state.activeRecipe.yield?.toString()} serving(s)"),
@@ -97,25 +111,34 @@ class _RecipeState extends State<Recipe> {
                         child: Text("Ingredients",
                             style: TextStyle(
                               fontSize: 20.0,
-                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              color:
+                                  state.darkMode ? Colors.white : Colors.black,
                             )),
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: state.activeRecipe.ingredients.entries
                             .map((ing) => Column(
-                              children: [
-                                if(ing.value.quantity == 0) ...[
-                                  Text(
-                                      "• ${ing.key}",
-                                      style: TextStyle(fontSize: 16.0)),
-                                ] else ...[
-                                  Text(
-                                      "• ${num.tryParse(ing.value.quantity?.toStringAsFixed(1) ?? "") ?? ""} ${ing.value.unit ?? ""} ${ing.key}",
-                                      style: TextStyle(fontSize: 16.0)),
-                                ]
-                              ],
-                            ))
+                                  children: [
+                                    if (ing.value.quantity == 0) ...[
+                                      Text("• ${ing.key}",
+                                          style: TextStyle(
+                                              fontSize: 16.0,
+                                              color: state.darkMode
+                                                  ? Colors.white
+                                                  : Colors.black)),
+                                    ] else ...[
+                                      Text(
+                                          "• ${num.tryParse(ing.value.quantity?.toStringAsFixed(1) ?? "") ?? ""} ${ing.value.unit ?? ""} ${ing.key}",
+                                          style: TextStyle(
+                                              fontSize: 16.0,
+                                              color: state.darkMode
+                                                  ? Colors.white
+                                                  : Colors.black)),
+                                    ]
+                                  ],
+                                ))
                             .toList(),
                       ),
                       Padding(
@@ -123,7 +146,9 @@ class _RecipeState extends State<Recipe> {
                         child: Text("Procedure",
                             style: TextStyle(
                               fontSize: 20.0,
-                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              color:
+                                  state.darkMode ? Colors.white : Colors.black,
                             )),
                       ),
                       Column(
@@ -132,7 +157,11 @@ class _RecipeState extends State<Recipe> {
                             .map((step) => Column(
                                   children: [
                                     Text("• " + step,
-                                        style: TextStyle(fontSize: 16.0)),
+                                        style: TextStyle(
+                                            fontSize: 16.0,
+                                            color: state.darkMode
+                                                ? Colors.white
+                                                : Colors.black)),
                                     SizedBox(height: 10.0),
                                   ],
                                 ))
