@@ -75,7 +75,7 @@ class _RecipeState extends State<Recipe> {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: Center(child: Image.network('https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg')),
+                        child: Center(child: Image.network(state.activeRecipe.imageLink!)),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
