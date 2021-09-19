@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -70,7 +71,13 @@ class _PlanState extends State<Plan> {
                       ListTile(
                         contentPadding: EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 10.0),
-                        leading: Icon(Icons.restaurant_menu),
+                       leading: CachedNetworkImage(
+                          imageUrl: element.imageLink,
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
+                          width: 50),
                         title: Text(
                             element.name,
                             style: TextStyle(fontWeight: FontWeight.bold),

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_ready/state.dart';
@@ -54,8 +55,9 @@ class _TodayState extends State<Today> {
                 ),
                 SizedBox(height: 10.0),
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: 2,
+                  child: Consumer<StateTracker>(builder: (context, state, child) {
+                  return ListView.builder(
+                    itemCount: state.todayRecipes.length,
                     itemBuilder: (context, index) {
                       return Card(
                         elevation: 8.0,
@@ -67,14 +69,16 @@ class _TodayState extends State<Today> {
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment
-                                    .spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Column(
                                     children: [
                                       Icon(Icons.timer),
                                       Text(
-                                        "Time",
+                                        state.todayRecipes[index].prepTime
+                                                ?.toString() ??
+                                            "",
                                         style: TextStyle(fontSize: 14),
                                       )
                                     ],
@@ -82,11 +86,12 @@ class _TodayState extends State<Today> {
                                   Column(
                                     children: [
                                       Text(
-                                        "Today's Recipe",
+                                        state.todayRecipes[index].name,
                                         style: TextStyle(fontSize: 20),
                                       ),
                                       Text(
-                                        "Today's Recipe Description",
+                                        state.todayRecipes[index].description ??
+                                            "",
                                         style: TextStyle(fontSize: 16),
                                       ),
                                     ],
@@ -94,20 +99,26 @@ class _TodayState extends State<Today> {
                                 ],
                               ),
                               Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 10.0),
-                                child: Image.network(
-                                    'https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg'),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10.0),
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                      state.todayRecipes[index].imageLink ?? "",
+                                  placeholder: (context, url) =>
+                                      CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
+                                ),
                               ),
                             ],
                           ),
                         ),
                       );
                     },
-                  ),
-                ),
-              ],
-            ),
+                  );
+                }),
+              ),
+            ],
           ),
         ),
       );

@@ -71,7 +71,7 @@ class _GroceriesState extends State<Groceries> {
                                   "${num.tryParse(state.groceries.values
                                       .elementAt(index)
                                       .quantity
-                                      ?.toStringAsFixed(2) ?? "") ?? ""} ${state
+                                      ?.toStringAsFixed(1) ?? "") ?? ""} ${state
                                       .groceries.values
                                       .elementAt(index)
                                       .unit ?? ""} ${state.groceries.keys

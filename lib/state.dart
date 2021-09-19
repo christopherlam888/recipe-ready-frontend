@@ -89,6 +89,8 @@ class StateTracker extends ChangeNotifier {
   static final String ROOT_URL = "https://api.eggworld.tk/recipes/";
   final List<Recipe> _recipes = [];
   List<Recipe> get recipes => _recipes;
+  List<Recipe> get todayRecipes =>
+      _recipes.where((i) => DateTime.now().day == i.date.day).toList();
   Map<String, Grocery> _groceries = Map(); // quantity (num), metadata (Grocery)
   Map<String, Grocery> get groceries => _groceries;
 
@@ -159,7 +161,10 @@ class StateTracker extends ChangeNotifier {
   }
 
   void replaceRecipe(Recipe recipe, int index) {
+    final oldDate = _recipes[index].date;
     removeRecipe(index);
+
+    recipe.date = oldDate;
     _recipes.insert(index, recipe);
     // to get that grocery calculation
     addRecipe(recipe);
@@ -173,17 +178,31 @@ class StateTracker extends ChangeNotifier {
     notifyListeners();
   }
 
+  void fetchReplaceRecipe(int index) async {
+    Recipe recipe = (await fetchRecipes(1))[0];
+    replaceRecipe(recipe, index);
+  }
+
   void fetchMoreRecipes() async {
+    // yikes
+    List<Recipe> newRecipes = await fetchRecipes(mealsPerDay * numDaysPlanned);
+    final now = DateTime.now();
+    for (int i = 0; i < newRecipes.length; i++) {
+      int offset = 0;
+      if ((i + 1) % mealsPerDay == 0) offset++;
+      newRecipes[i].date = DateTime(now.year, now.month, now.day + offset);
+      addRecipe(newRecipes[i]);
+    }
+  }
+
+  Future<List<Recipe>> fetchRecipes(int limit) async {
     final response = await http.get(Uri.parse(
-        "$ROOT_URL?limit=$numPeople&vegan=$vegan&vegetarian=$vegetarian&halal=$halal&no_tree_nuts=$noTreenuts&no_dairy=$noDairy&no_peanuts=$noPeanuts"));
+        "$ROOT_URL?limit=$limit&vegan=$vegan&vegetarian=$vegetarian&halal=$halal&no_tree_nuts=$noTreenuts&no_dairy=$noDairy&no_peanuts=$noPeanuts"));
     if (response.statusCode == 200) {
       // TODO: do date processing
-      (jsonDecode(response.body) as List)
+      return (jsonDecode(response.body) as List)
           .map((i) => Recipe.fromJson(i))
-          .toList()
-          .forEach((recipe) {
-        addRecipe(recipe);
-      });
+          .toList();
     } else {
       throw Exception("Failed to get new recipes.");
     }
