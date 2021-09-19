@@ -98,10 +98,13 @@ class _GroceriesState extends State<Groceries> {
                                       0) ...[
                                     Text(
                                         "${state.groceries.keys.elementAt(index)}",
-                                        style: TextStyle(fontSize: 16.0)),
+                                        style: TextStyle(
+                                            fontSize: 16.0,
+                                            color: Colors.black)),
                                   ] else ...[
                                     Text(
-                                        "${num.tryParse(state.groceries.values.elementAt(index).quantity?.toStringAsFixed(1) ?? "") ?? ""} ${state.groceries.values.elementAt(index).unit ?? ""} ${state.groceries.keys.elementAt(index)}"),
+                                        "${num.tryParse(state.groceries.values.elementAt(index).quantity?.toStringAsFixed(1) ?? "") ?? ""} ${state.groceries.values.elementAt(index).unit ?? ""} ${state.groceries.keys.elementAt(index)}",
+                                        style: TextStyle(color: Colors.black)),
                                   ]
                                 ],
                               ),
