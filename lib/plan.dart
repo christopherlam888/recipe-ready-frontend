@@ -39,9 +39,9 @@ class _PlanState extends State<Plan> {
                 actionPane: SlidableDrawerActionPane(),
                 actions: <Widget>[
                   IconSlideAction(
-                    caption: "Save",
-                    color: Colors.blue,
-                    icon: Icons.save,
+                    caption: "Favourite",
+                    color: Colors.yellow[600],
+                    icon: Icons.star_border_sharp,
                     onTap: () {},
                   ),
                 ],
