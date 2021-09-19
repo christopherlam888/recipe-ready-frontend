@@ -71,7 +71,12 @@ class _PlanState extends State<Plan> {
                         contentPadding: EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 10.0),
                         leading: Icon(Icons.restaurant_menu),
-                        title: Text(element.name),
+                        title: Text(
+                            element.name,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                            maxLines: 3,
+                        ),
                         trailing: IconButton(
                           icon: Icon(Icons.remove_red_eye),
                           onPressed: () {
