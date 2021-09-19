@@ -11,7 +11,9 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Provider.of<StateTracker>(context, listen: true).darkMode
+          ? Colors.black
+          : Colors.white,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(10.0, 40.0, 10.0, 75.0),
@@ -23,16 +25,40 @@ class _SettingsState extends State<Settings> {
                   Text(
                     "Settings",
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: state.darkMode ? Colors.white : Colors.black),
                   ),
                   SizedBox(height: 10.0),
+                  SwitchListTile(
+                    title: Text("Dark mode",
+                        style: TextStyle(
+                            color:
+                                state.darkMode ? Colors.white : Colors.black)),
+                    activeColor: Colors.green,
+                    inactiveTrackColor: Colors.grey,
+                    value: state.darkMode,
+                    onChanged: (bool value) {
+                      setState(() {
+                        state.darkMode = value;
+                      });
+                    },
+                  ),
                   Text(
                     "Dietary Restrictions",
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: state.darkMode ? Colors.white : Colors.black),
                   ),
                   SwitchListTile(
-                    title: Text("Vegetarian"),
+                    title: Text("Vegetarian",
+                        style: TextStyle(
+                            color:
+                                state.darkMode ? Colors.white : Colors.black)),
                     activeColor: Colors.green,
+                    inactiveTrackColor: Colors.grey,
                     value: state.vegetarian,
                     onChanged: (bool value) {
                       setState(() {
@@ -41,8 +67,12 @@ class _SettingsState extends State<Settings> {
                     },
                   ),
                   SwitchListTile(
-                    title: Text("Vegan"),
+                    title: Text("Vegan",
+                        style: TextStyle(
+                            color:
+                                state.darkMode ? Colors.white : Colors.black)),
                     activeColor: Colors.green,
+                    inactiveTrackColor: Colors.grey,
                     value: state.vegan,
                     onChanged: (bool value) {
                       setState(() {
@@ -51,8 +81,12 @@ class _SettingsState extends State<Settings> {
                     },
                   ),
                   SwitchListTile(
-                    title: Text("Tree nut-free"),
+                    title: Text("Tree nut-free",
+                        style: TextStyle(
+                            color:
+                                state.darkMode ? Colors.white : Colors.black)),
                     activeColor: Colors.green,
+                    inactiveTrackColor: Colors.grey,
                     value: state.noTreenuts,
                     onChanged: (bool value) {
                       setState(() {
@@ -61,8 +95,12 @@ class _SettingsState extends State<Settings> {
                     },
                   ),
                   SwitchListTile(
-                    title: Text("Peanut-free"),
+                    title: Text("Peanut-free",
+                        style: TextStyle(
+                            color:
+                                state.darkMode ? Colors.white : Colors.black)),
                     activeColor: Colors.green,
+                    inactiveTrackColor: Colors.grey,
                     value: state.noPeanuts,
                     onChanged: (bool value) {
                       setState(() {
@@ -71,8 +109,12 @@ class _SettingsState extends State<Settings> {
                     },
                   ),
                   SwitchListTile(
-                    title: Text("Dairy-free"),
+                    title: Text("Dairy-free",
+                        style: TextStyle(
+                            color:
+                                state.darkMode ? Colors.white : Colors.black)),
                     activeColor: Colors.green,
+                    inactiveTrackColor: Colors.grey,
                     value: state.noDairy,
                     onChanged: (bool value) {
                       setState(() {
@@ -81,8 +123,12 @@ class _SettingsState extends State<Settings> {
                     },
                   ),
                   SwitchListTile(
-                    title: Text("Halal"),
+                    title: Text("Halal",
+                        style: TextStyle(
+                            color:
+                                state.darkMode ? Colors.white : Colors.black)),
                     activeColor: Colors.green,
+                    inactiveTrackColor: Colors.grey,
                     value: state.halal,
                     onChanged: (bool value) {
                       setState(() {
@@ -92,7 +138,10 @@ class _SettingsState extends State<Settings> {
                   ),
                   Text(
                     "Meals",
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: state.darkMode ? Colors.white : Colors.black),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -101,14 +150,19 @@ class _SettingsState extends State<Settings> {
                       children: [
                         Text(
                           "Servings",
-                          style: TextStyle(fontSize: 16),
+                          style: TextStyle(
+                              fontSize: 16,
+                              color:
+                                  state.darkMode ? Colors.white : Colors.black),
                         ),
                         DropdownButton<String>(
                           value: state.numPeople.toString(),
                           icon: const Icon(Icons.arrow_downward),
                           iconSize: 24,
                           elevation: 16,
-                          style: const TextStyle(color: Colors.black),
+                          style: TextStyle(
+                              color:
+                                  state.darkMode ? Colors.white : Colors.black),
                           underline: Container(height: 2, color: Colors.green),
                           onChanged: (String? newValue) {
                             setState(() {
@@ -127,7 +181,11 @@ class _SettingsState extends State<Settings> {
                           ].map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
-                              child: Text(value),
+                              child: Text(value,
+                                  style: TextStyle(
+                                      color: state.darkMode
+                                          ? Colors.white
+                                          : Colors.black)),
                             );
                           }).toList(),
                         ),
@@ -141,14 +199,19 @@ class _SettingsState extends State<Settings> {
                       children: [
                         Text(
                           "Meals per day",
-                          style: TextStyle(fontSize: 16),
+                          style: TextStyle(
+                              fontSize: 16,
+                              color:
+                                  state.darkMode ? Colors.white : Colors.black),
                         ),
                         DropdownButton<String>(
                           value: state.mealsPerDay.toString(),
                           icon: const Icon(Icons.arrow_downward),
                           iconSize: 24,
                           elevation: 16,
-                          style: const TextStyle(color: Colors.black),
+                          style: TextStyle(
+                              color:
+                                  state.darkMode ? Colors.white : Colors.black),
                           underline: Container(height: 2, color: Colors.green),
                           onChanged: (String? newValue) {
                             setState(() {
@@ -159,7 +222,11 @@ class _SettingsState extends State<Settings> {
                               .map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
-                              child: Text(value),
+                              child: Text(value,
+                                  style: TextStyle(
+                                      color: state.darkMode
+                                          ? Colors.white
+                                          : Colors.black)),
                             );
                           }).toList(),
                         ),
@@ -173,14 +240,19 @@ class _SettingsState extends State<Settings> {
                       children: [
                         Text(
                           "Days to plan",
-                          style: TextStyle(fontSize: 16),
+                          style: TextStyle(
+                              fontSize: 16,
+                              color:
+                                  state.darkMode ? Colors.white : Colors.black),
                         ),
                         DropdownButton<String>(
                           value: state.numDaysPlanned.toString(),
                           icon: const Icon(Icons.arrow_downward),
                           iconSize: 24,
                           elevation: 16,
-                          style: const TextStyle(color: Colors.black),
+                          style: TextStyle(
+                              color:
+                                  state.darkMode ? Colors.white : Colors.black),
                           underline: Container(height: 2, color: Colors.green),
                           onChanged: (String? newValue) {
                             setState(() {

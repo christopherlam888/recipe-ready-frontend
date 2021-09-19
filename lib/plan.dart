@@ -16,7 +16,9 @@ class _PlanState extends State<Plan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffe6ffe6),
+      backgroundColor: Provider.of<StateTracker>(context, listen: true).darkMode
+          ? Colors.black87
+          : Colors.white,
       body: Padding(
         padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 75.0),
         child: Consumer<StateTracker>(builder: (context, state, child) {
@@ -31,8 +33,11 @@ class _PlanState extends State<Plan> {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 value,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: state.darkMode ? Colors.white : Colors.black),
               ),
             ),
             itemBuilder: (c, element) {
@@ -57,41 +62,35 @@ class _PlanState extends State<Plan> {
                 child: Card(
                   elevation: 8.0,
                   margin:
-                      new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+                      new EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
                   child: Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                          colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.dstATop),
-                          image: NetworkImage(element.imageLink),
-                          fit: BoxFit.fitWidth,
-                          alignment: Alignment.topCenter,
+                        colorFilter: new ColorFilter.mode(
+                            Colors.black.withOpacity(0.5), BlendMode.darken),
+                        image: NetworkImage(element.imageLink),
+                        fit: BoxFit.fitWidth,
+                        alignment: Alignment.center,
                       ),
                     ),
-                    child:
-                      ListTile(
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 20.0, vertical: 10.0),
-                       leading: CachedNetworkImage(
-                          imageUrl: element.imageLink,
-                          placeholder: (context, url) =>
-                              CircularProgressIndicator(),
-                          errorWidget: (context, url, error) =>
-                              Icon(Icons.error),
-                          width: 50),
-                        title: Text(
-                            element.name,
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center,
-                            maxLines: 3,
-                        ),
-                        trailing: IconButton(
-                          icon: Icon(Icons.remove_red_eye),
-                          onPressed: () {
-                            state.activeRecipe = element;
-                            Navigator.pushNamed(context, '/recipe');
-                          },
-                        ),
+                    child: ListTile(
+                      contentPadding: EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 10.0),
+                      title: Text(
+                        element.name,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white),
+                        textAlign: TextAlign.left,
+                        maxLines: 3,
                       ),
+                      trailing: IconButton(
+                        icon: Icon(Icons.remove_red_eye, color: Colors.white),
+                        onPressed: () {
+                          state.activeRecipe = element;
+                          Navigator.pushNamed(context, '/recipe');
+                        },
+                      ),
+                    ),
                   ),
                 ),
               );
@@ -104,7 +103,7 @@ class _PlanState extends State<Plan> {
             Provider.of<StateTracker>(context, listen: false)
                 .fetchMoreRecipes();
           },
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.green.shade300,
           icon: Icon(
             Icons.add,
             color: Colors.black,

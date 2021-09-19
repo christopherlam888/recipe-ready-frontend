@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:recipe_ready/plan.dart';
+import 'package:recipe_ready/state.dart';
 import 'package:recipe_ready/today.dart';
 import 'package:recipe_ready/groceries.dart';
 import 'package:recipe_ready/settings.dart';
@@ -10,14 +12,13 @@ class Nav extends StatefulWidget {
 }
 
 class _NavState extends State<Nav> {
-
   int _selectedIndex = 0;
-
 
   void _onItemTap(int index) {
     setState(() {
       _selectedIndex = index;
-      pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.ease);
+      pageController.animateToPage(index,
+          duration: Duration(milliseconds: 500), curve: Curves.ease);
     });
   }
 
@@ -35,7 +36,7 @@ class _NavState extends State<Nav> {
   Widget buildPageView() {
     return PageView(
       controller: pageController,
-      onPageChanged: (index){
+      onPageChanged: (index) {
         pageChanged(index);
       },
       children: <Widget>[
@@ -80,6 +81,11 @@ class _NavState extends State<Nav> {
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.green,
+        backgroundColor:
+            Provider.of<StateTracker>(context, listen: true).darkMode
+                ? Color.fromRGBO(50, 60, 80, 1)
+                : Colors.white,
+        unselectedItemColor: Colors.grey,
         onTap: (index) {
           _onItemTap(index);
         },
