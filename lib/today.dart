@@ -1,4 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:recipe_ready/state.dart';
 
 class Today extends StatefulWidget {
   @override
@@ -23,52 +26,68 @@ class _TodayState extends State<Today> {
               ),
               SizedBox(height: 10.0),
               Expanded(
-                child: ListView.builder(
-                  itemCount: 2,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      elevation: 8.0,
-                      margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Column(
-                                  children: [
-                                    Icon(Icons.timer),
-                                    Text(
-                                      "Time",
-                                      style: TextStyle(fontSize: 14),
-                                    )
-                                  ],
+                child: Consumer<StateTracker>(builder: (context, state, child) {
+                  return ListView.builder(
+                    itemCount: state.todayRecipes.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        elevation: 8.0,
+                        margin: new EdgeInsets.symmetric(
+                            horizontal: 10.0, vertical: 6.0),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 10.0),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Icon(Icons.timer),
+                                      Text(
+                                        state.todayRecipes[index].prepTime
+                                                ?.toString() ??
+                                            "",
+                                        style: TextStyle(fontSize: 14),
+                                      )
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        state.todayRecipes[index].name,
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                      Text(
+                                        state.todayRecipes[index].description ??
+                                            "",
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10.0),
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                      state.todayRecipes[index].imageLink ?? "",
+                                  placeholder: (context, url) =>
+                                      CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
                                 ),
-                                Column(
-                                  children: [
-                                    Text(
-                                      "Today's Recipe",
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                    Text(
-                                      "Today's Recipe Description",
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10.0),
-                              child: Image.network('https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg'),
-                            ),
-                          ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                ),
+                      );
+                    },
+                  );
+                }),
               ),
             ],
           ),

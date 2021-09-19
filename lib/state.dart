@@ -89,6 +89,8 @@ class StateTracker extends ChangeNotifier {
   static final String ROOT_URL = "https://api.eggworld.tk/recipes/";
   final List<Recipe> _recipes = [];
   List<Recipe> get recipes => _recipes;
+  List<Recipe> get todayRecipes =>
+      _recipes.where((i) => DateTime.now().day == i.date.day).toList();
   Map<String, Grocery> _groceries = Map(); // quantity (num), metadata (Grocery)
   Map<String, Grocery> get groceries => _groceries;
 
@@ -159,7 +161,10 @@ class StateTracker extends ChangeNotifier {
   }
 
   void replaceRecipe(Recipe recipe, int index) {
+    final oldDate = _recipes[index].date;
     removeRecipe(index);
+
+    recipe.date = oldDate;
     _recipes.insert(index, recipe);
     // to get that grocery calculation
     addRecipe(recipe);
@@ -180,10 +185,14 @@ class StateTracker extends ChangeNotifier {
 
   void fetchMoreRecipes() async {
     // yikes
-    List<Recipe> newRecipes = await fetchRecipes(numPeople * numDaysPlanned);
-    newRecipes.forEach((element) {
-      addRecipe(element);
-    });
+    List<Recipe> newRecipes = await fetchRecipes(mealsPerDay * numDaysPlanned);
+    final now = DateTime.now();
+    for (int i = 0; i < newRecipes.length; i++) {
+      int offset = 0;
+      if ((i + 1) % mealsPerDay == 0) offset++;
+      newRecipes[i].date = DateTime(now.year, now.month, now.day + offset);
+      addRecipe(newRecipes[i]);
+    }
   }
 
   Future<List<Recipe>> fetchRecipes(int limit) async {
