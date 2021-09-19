@@ -27,6 +27,11 @@ class _PlanState extends State<Plan> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Image(
+                  image: AssetImage(
+                      Provider.of<StateTracker>(context, listen: true).darkMode
+                          ? "assets/wumpus_dark.png"
+                          : "assets/wumpus.png")),
               Text(
                 "Sorry, you do not have any saved recipes yet.",
                 textAlign: TextAlign.center,
@@ -40,7 +45,7 @@ class _PlanState extends State<Plan> {
               ),
               SizedBox(height: 20.0),
               Text(
-                "Press \"Find Recipes\" to add some!",
+                "Press \"Refresh Recipes\" to add some!",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 22,
@@ -64,7 +69,7 @@ class _PlanState extends State<Plan> {
               color: Colors.black,
             ),
             label: Text(
-              "Find Recipes",
+              "Refresh Recipes",
               style: TextStyle(
                 color: Colors.black,
               ),
@@ -115,7 +120,9 @@ class _PlanState extends State<Plan> {
                       caption: "Delete",
                       color: Colors.red,
                       icon: Icons.delete,
-                      onTap: () {},
+                      onTap: () {
+                        state.fetchReplaceRecipe(element);
+                      },
                     ),
                   ],
                   child: Card(
@@ -168,7 +175,7 @@ class _PlanState extends State<Plan> {
               color: Colors.black,
             ),
             label: Text(
-              "Find Recipes",
+              "Refresh Recipes",
               style: TextStyle(
                 color: Colors.black,
               ),

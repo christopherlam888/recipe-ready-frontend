@@ -175,13 +175,15 @@ class StateTracker extends ChangeNotifier {
     notifyListeners();
   }
 
-  void fetchReplaceRecipe(int index) async {
+  void fetchReplaceRecipe(Recipe r) async {
+    final index = recipes
+        .indexWhere((element) => element.id == r.id && element.date == r.date);
     Recipe recipe = (await fetchRecipes(1))[0];
     replaceRecipe(recipe, index);
   }
 
   void fetchMoreRecipes() async {
-    // yikes
+    clearRecipes();
     List<Recipe> newRecipes = await fetchRecipes(mealsPerDay * numDaysPlanned);
     final now = DateTime.now();
     for (int i = 0; i < newRecipes.length; i++) {
@@ -196,7 +198,6 @@ class StateTracker extends ChangeNotifier {
     final response = await http.get(Uri.parse(
         "$ROOT_URL?limit=$limit&vegan=$vegan&vegetarian=$vegetarian&halal=$halal&no_tree_nuts=$noTreenuts&no_dairy=$noDairy&no_peanuts=$noPeanuts"));
     if (response.statusCode == 200) {
-      // TODO: do date processing
       return (jsonDecode(response.body) as List)
           .map((i) => Recipe.fromJson(i))
           .toList();

@@ -23,6 +23,12 @@ class _TodayState extends State<Today> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                Image(
+                    image: AssetImage(
+                        Provider.of<StateTracker>(context, listen: true)
+                                .darkMode
+                            ? "assets/wumpus_dark.png"
+                            : "assets/wumpus.png")),
                 Text(
                   "Sorry, you do not have any saved recipes yet.",
                   textAlign: TextAlign.center,
