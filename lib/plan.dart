@@ -86,6 +86,8 @@ class _PlanState extends State<Plan> {
           padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0.0),
           child: Consumer<StateTracker>(builder: (context, state, child) {
             return GroupedListView<dynamic, String>(
+              padding: const EdgeInsets.only(
+                  bottom: kFloatingActionButtonMargin + 60),
               elements: state.recipes,
               groupBy: (element) => DateFormat.yMMMd().format(element.date),
               groupComparator: (value1, value2) => value2.compareTo(value1),

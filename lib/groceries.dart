@@ -79,6 +79,8 @@ class _GroceriesState extends State<Groceries> {
                   SizedBox(height: 10.0),
                   Expanded(
                     child: ListView.builder(
+                      padding: const EdgeInsets.only(
+                          bottom: kFloatingActionButtonMargin + 60),
                       itemCount: state.groceries.length,
                       itemBuilder: (context, index) {
                         return Card(
@@ -148,20 +150,22 @@ class _GroceriesState extends State<Groceries> {
           ),
         ),
         floatingActionButton: FloatingActionButton.extended(
-            onPressed: () {
-              Provider.of<StateTracker>(context, listen: false).clearRecipes();
-            },
-            backgroundColor: Color(0xff990000),
-            icon: Icon(
-              Icons.clear,
+          onPressed: () {
+            Provider.of<StateTracker>(context, listen: false).clearRecipes();
+          },
+          backgroundColor: Color(0xff990000),
+          icon: Icon(
+            Icons.clear,
+            color: Colors.white,
+          ),
+          label: Text(
+            "Reset All",
+            style: TextStyle(
               color: Colors.white,
             ),
-            label: Text(
-              "Reset All",
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            )),
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       );
     }
   }
