@@ -13,15 +13,29 @@ class _TodayState extends State<Today> {
     if (Provider.of<StateTracker>(context, listen: false).recipes.length == 0){
       return Scaffold(
           backgroundColor: Color(0xffe6ffe6),
-          body: Column(
-            children: [
-              Text(
-                  "Sorry, you have not saved any recipes yet."
-              ),
-              Text(
-                  "To get started, have a look at the Plan tab!"
-              )
-            ],
+          body: Padding(
+            padding: const EdgeInsets.all(40.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  "Sorry, you do not have any saved recipes yet.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 22,
+                  ),
+                ),
+                SizedBox(height: 20.0),
+                Text(
+                  "To get started, have a look at the Plan tab!",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 22,
+                  ),
+                ),
+              ],
+            ),
           )
       );
     } else {
