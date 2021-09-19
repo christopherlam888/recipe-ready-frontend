@@ -11,83 +11,108 @@ class Groceries extends StatefulWidget {
 class _GroceriesState extends State<Groceries> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xffe6ffe6),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(10.0, 40.0, 10.0, 75.0),
-        child: Container(
-          child: Consumer<StateTracker>(builder: (context, state, child) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  "Next ${state.mealsPerDay} day(s)",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 10.0),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: state.groceries.length,
-                    itemBuilder: (context, index) {
-                      return Card(
-                        elevation: 8.0,
-                        margin: new EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 6.0),
-                        child: Container(
-                          child: CheckboxListTile(
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 20.0, vertical: 10.0),
-                            title: Text(
-                                "${num.tryParse(state.groceries.values.elementAt(index).quantity?.toStringAsFixed(2) ?? "") ?? ""} ${state.groceries.values.elementAt(index).unit ?? ""} ${state.groceries.keys.elementAt(index)}"),
-                            value:
-                                state.groceries.values.elementAt(index).checked,
-                            secondary: CachedNetworkImage(
-                              imageUrl: state.groceries.values
-                                  .elementAt(index)
-                                  .imageLink,
-                              placeholder: (context, url) =>
-                                  CircularProgressIndicator(),
-                              errorWidget: (context, url, error) =>
-                                  Icon(Icons.error),
-                            ),
-                            controlAffinity: ListTileControlAffinity.leading,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                state.groceries.values
-                                    .elementAt(index)
-                                    .checked = value!;
-                              });
-                            },
-                            activeColor: Colors.green,
-                            checkColor: Colors.white,
-                          ),
-                        ),
-                      );
-                    },
+    if (Provider.of<StateTracker>(context, listen: false).recipes.length == 0){
+      return Scaffold(
+          backgroundColor: Color(0xffe6ffe6),
+          body: Column(
+            children: [
+              Text(
+                  "Sorry, you have not saved any recipes yet."
+              ),
+              Text(
+                  "To get started, have a look at the Plan tab!"
+              )
+            ],
+          )
+      );
+    } else {
+      return Scaffold(
+        backgroundColor: Color(0xffe6ffe6),
+        body: Padding(
+          padding: const EdgeInsets.fromLTRB(10.0, 40.0, 10.0, 75.0),
+          child: Container(
+            child: Consumer<StateTracker>(builder: (context, state, child) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    "Next ${state.mealsPerDay} day(s)",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                ),
-              ],
-            );
-          }),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            Provider.of<StateTracker>(context, listen: false).clearRecipes();
-          },
-          backgroundColor: Color(0xff990000),
-          icon: Icon(
-            Icons.clear,
-            color: Colors.white,
+                  SizedBox(height: 10.0),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: state.groceries.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          elevation: 8.0,
+                          margin: new EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 6.0),
+                          child: Container(
+                            child: CheckboxListTile(
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 20.0, vertical: 10.0),
+                              title: Text(
+                                  "${num.tryParse(state.groceries.values
+                                      .elementAt(index)
+                                      .quantity
+                                      ?.toStringAsFixed(2) ?? "") ?? ""} ${state
+                                      .groceries.values
+                                      .elementAt(index)
+                                      .unit ?? ""} ${state.groceries.keys
+                                      .elementAt(index)}"),
+                              value:
+                              state.groceries.values
+                                  .elementAt(index)
+                                  .checked,
+                              secondary: CachedNetworkImage(
+                                imageUrl: state.groceries.values
+                                    .elementAt(index)
+                                    .imageLink,
+                                placeholder: (context, url) =>
+                                    CircularProgressIndicator(),
+                                errorWidget: (context, url, error) =>
+                                    Icon(Icons.error),
+                              ),
+                              controlAffinity: ListTileControlAffinity.leading,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  state.groceries.values
+                                      .elementAt(index)
+                                      .checked = value!;
+                                });
+                              },
+                              activeColor: Colors.green,
+                              checkColor: Colors.white,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              );
+            }),
           ),
-          label: Text(
-            "Reset All",
-            style: TextStyle(
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {
+              Provider.of<StateTracker>(context, listen: false).clearRecipes();
+            },
+            backgroundColor: Color(0xff990000),
+            icon: Icon(
+              Icons.clear,
               color: Colors.white,
             ),
-          )),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-    );
+            label: Text(
+              "Reset All",
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            )),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      );
+    }
   }
 }
