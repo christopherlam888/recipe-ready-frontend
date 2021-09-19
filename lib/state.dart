@@ -173,17 +173,44 @@ class StateTracker extends ChangeNotifier {
     notifyListeners();
   }
 
+  void fetchReplaceRecipe(int index) async {
+    Recipe recipe = (await fetchRecipes(1))[0];
+    replaceRecipe(recipe, index);
+  }
+
   void fetchMoreRecipes() async {
+    // yikes
+    List<Recipe> newRecipes = await fetchRecipes(numPeople);
+    int repetitions = 0;
+    bool allRecipesCollected = false;
+    while (!allRecipesCollected) {
+      if (repetitions > 10) break;
+      newRecipes = newRecipes.where((i) {
+        for (int j = 0; j < recipes.length; j++) {
+          if (recipes[j].id == i.id) {
+            return false;
+          }
+        }
+        // TODO: check for duplicates within newRecipes
+        return true;
+      }).toList();
+      if (numPeople == newRecipes.length) allRecipesCollected = true;
+      newRecipes.addAll(await fetchRecipes(numPeople - newRecipes.length));
+      repetitions++;
+    }
+    newRecipes.forEach((element) {
+      addRecipe(element);
+    });
+  }
+
+  Future<List<Recipe>> fetchRecipes(int limit) async {
     final response = await http.get(Uri.parse(
         "$ROOT_URL?limit=$numPeople&vegan=$vegan&vegetarian=$vegetarian&halal=$halal&no_tree_nuts=$noTreenuts&no_dairy=$noDairy&no_peanuts=$noPeanuts"));
     if (response.statusCode == 200) {
       // TODO: do date processing
-      (jsonDecode(response.body) as List)
+      return (jsonDecode(response.body) as List)
           .map((i) => Recipe.fromJson(i))
-          .toList()
-          .forEach((recipe) {
-        addRecipe(recipe);
-      });
+          .toList();
     } else {
       throw Exception("Failed to get new recipes.");
     }

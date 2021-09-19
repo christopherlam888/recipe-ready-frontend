@@ -39,7 +39,7 @@ class _GroceriesState extends State<Groceries> {
                             contentPadding: EdgeInsets.symmetric(
                                 horizontal: 20.0, vertical: 10.0),
                             title: Text(
-                                "${num.tryParse(state.groceries.values.elementAt(index).quantity?.toStringAsFixed(2) ?? "") ?? ""} ${state.groceries.values.elementAt(index).unit ?? ""} ${state.groceries.keys.elementAt(index)}"),
+                                "${num.tryParse(state.groceries.values.elementAt(index).quantity?.toStringAsFixed(1) ?? "") ?? ""} ${state.groceries.values.elementAt(index).unit ?? ""} ${state.groceries.keys.elementAt(index)}"),
                             value:
                                 state.groceries.values.elementAt(index).checked,
                             secondary: CachedNetworkImage(

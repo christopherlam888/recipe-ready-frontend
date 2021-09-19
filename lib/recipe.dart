@@ -14,9 +14,6 @@ class _RecipeState extends State<Recipe> {
     "Horse manure",
     "Chemistry textbooks"
   ];
-
-  List<String> steps = ["Pour this.", "Mix that.", "Eat everything!"];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,6 +70,7 @@ class _RecipeState extends State<Recipe> {
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Center(
                             child: CachedNetworkImage(
+                                // TODO: non idea why this is broken fix it later
                                 imageUrl: state.activeRecipe.imageLink ?? "",
                                 placeholder: (context, url) =>
                                     CircularProgressIndicator(),
@@ -101,8 +99,9 @@ class _RecipeState extends State<Recipe> {
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: ingredients
-                            .map((ingredient) => Text("• " + ingredient,
+                        children: state.activeRecipe.ingredients.entries
+                            .map((ing) => Text(
+                                "• ${num.tryParse(ing.value.quantity?.toStringAsFixed(1) ?? "") ?? ""} ${ing.value.unit ?? ""} ${ing.key}",
                                 style: TextStyle(fontSize: 16.0)))
                             .toList(),
                       ),
@@ -116,7 +115,7 @@ class _RecipeState extends State<Recipe> {
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: steps
+                        children: state.activeRecipe.steps!
                             .map((step) => Text("• " + step,
                                 style: TextStyle(fontSize: 16.0)))
                             .toList(),
