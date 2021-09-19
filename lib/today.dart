@@ -59,58 +59,64 @@ class _TodayState extends State<Today> {
                   return ListView.builder(
                     itemCount: state.todayRecipes.length,
                     itemBuilder: (context, index) {
-                      return Card(
-                        elevation: 8.0,
-                        margin: new EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 6.0),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20.0, vertical: 10.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Column(
-                                    children: [
-                                      Icon(Icons.timer),
-                                      Text(
-                                        state.todayRecipes[index].prepTime
-                                                ?.toString() ??
-                                            "",
-                                        style: TextStyle(fontSize: 14),
-                                      )
-                                    ],
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        state.todayRecipes[index].name,
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                      Text(
-                                        state.todayRecipes[index].description ??
-                                            "",
-                                        style: TextStyle(fontSize: 16),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 10.0),
-                                child: CachedNetworkImage(
-                                  imageUrl:
-                                      state.todayRecipes[index].imageLink ?? "",
-                                  placeholder: (context, url) =>
-                                      CircularProgressIndicator(),
-                                  errorWidget: (context, url, error) =>
-                                      Icon(Icons.error),
+                      return GestureDetector(
+                        onTap: () {
+                          state.activeRecipe = state.todayRecipes[index];
+                          Navigator.pushNamed(context, '/recipe');
+                        },
+                        child: Card(
+                          elevation: 8.0,
+                          margin: new EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 6.0),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20.0, vertical: 10.0),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Icon(Icons.timer),
+                                        Text(
+                                          state.todayRecipes[index].prepTime
+                                                  ?.toString() ??
+                                              "",
+                                          style: TextStyle(fontSize: 14),
+                                        )
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        Text(
+                                          state.todayRecipes[index].name,
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                        Text(
+                                          state.todayRecipes[index].description ??
+                                              "",
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                      ],
+                                    )
+                                  ],
                                 ),
-                              ),
-                            ],
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 10.0),
+                                  child: CachedNetworkImage(
+                                    imageUrl:
+                                        state.todayRecipes[index].imageLink ?? "",
+                                    placeholder: (context, url) =>
+                                        CircularProgressIndicator(),
+                                    errorWidget: (context, url, error) =>
+                                        Icon(Icons.error),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );
