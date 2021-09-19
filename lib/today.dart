@@ -27,18 +27,22 @@ class _TodayState extends State<Today> {
                   "Sorry, you do not have any saved recipes yet.",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 22,
-                    color: Provider.of<StateTracker>(context, listen: false).darkMode ? Colors.white : Colors.black
-                  ),
+                      fontSize: 22,
+                      color: Provider.of<StateTracker>(context, listen: true)
+                              .darkMode
+                          ? Colors.white
+                          : Colors.black),
                 ),
                 SizedBox(height: 20.0),
                 Text(
                   "To get started, have a look at the Plan tab!",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 22,
-                    color: Provider.of<StateTracker>(context, listen: false).darkMode ? Colors.white : Colors.black
-                  ),
+                      fontSize: 22,
+                      color: Provider.of<StateTracker>(context, listen: true)
+                              .darkMode
+                          ? Colors.white
+                          : Colors.black),
                 ),
               ],
             ),
@@ -115,7 +119,8 @@ class _TodayState extends State<Today> {
                                         ],
                                       ),
                                       Column(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: [
                                           Container(
                                             width: 230,
