@@ -180,24 +180,7 @@ class StateTracker extends ChangeNotifier {
 
   void fetchMoreRecipes() async {
     // yikes
-    List<Recipe> newRecipes = await fetchRecipes(numPeople);
-    int repetitions = 0;
-    bool allRecipesCollected = false;
-    while (!allRecipesCollected) {
-      if (repetitions > 10) break;
-      newRecipes = newRecipes.where((i) {
-        for (int j = 0; j < recipes.length; j++) {
-          if (recipes[j].id == i.id) {
-            return false;
-          }
-        }
-        // TODO: check for duplicates within newRecipes
-        return true;
-      }).toList();
-      if (numPeople == newRecipes.length) allRecipesCollected = true;
-      newRecipes.addAll(await fetchRecipes(numPeople - newRecipes.length));
-      repetitions++;
-    }
+    List<Recipe> newRecipes = await fetchRecipes(numPeople * numDaysPlanned);
     newRecipes.forEach((element) {
       addRecipe(element);
     });
@@ -205,7 +188,7 @@ class StateTracker extends ChangeNotifier {
 
   Future<List<Recipe>> fetchRecipes(int limit) async {
     final response = await http.get(Uri.parse(
-        "$ROOT_URL?limit=$numPeople&vegan=$vegan&vegetarian=$vegetarian&halal=$halal&no_tree_nuts=$noTreenuts&no_dairy=$noDairy&no_peanuts=$noPeanuts"));
+        "$ROOT_URL?limit=$limit&vegan=$vegan&vegetarian=$vegetarian&halal=$halal&no_tree_nuts=$noTreenuts&no_dairy=$noDairy&no_peanuts=$noPeanuts"));
     if (response.statusCode == 200) {
       // TODO: do date processing
       return (jsonDecode(response.body) as List)
