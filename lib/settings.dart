@@ -155,39 +155,46 @@ class _SettingsState extends State<Settings> {
                               color:
                                   state.darkMode ? Colors.white : Colors.black),
                         ),
-                        DropdownButton<String>(
-                          value: state.numPeople.toString(),
-                          icon: const Icon(Icons.arrow_downward),
-                          iconSize: 24,
-                          elevation: 16,
-                          style: TextStyle(
-                              color:
-                                  state.darkMode ? Colors.white : Colors.black),
-                          underline: Container(height: 2, color: Colors.green),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              state.numPeople = int.parse(newValue!);
-                            });
-                          },
-                          items: <String>[
-                            '1',
-                            '2',
-                            '3',
-                            '4',
-                            '5',
-                            '6',
-                            '7',
-                            '8'
-                          ].map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value,
-                                  style: TextStyle(
-                                      color: state.darkMode
-                                          ? Colors.white
-                                          : Colors.black)),
-                            );
-                          }).toList(),
+                        Theme(
+                          data: Theme.of(context).copyWith(
+                            canvasColor: state.darkMode
+                                ? Colors.black
+                                : Colors.white,
+                          ),
+                          child: DropdownButton<String>(
+                            value: state.numPeople.toString(),
+                            icon: const Icon(Icons.arrow_downward),
+                            iconSize: 24,
+                            elevation: 16,
+                            style: TextStyle(
+                                color:
+                                    state.darkMode ? Colors.white : Colors.black),
+                            underline: Container(height: 2, color: Colors.green),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                state.numPeople = int.parse(newValue!);
+                              });
+                            },
+                            items: <String>[
+                              '1',
+                              '2',
+                              '3',
+                              '4',
+                              '5',
+                              '6',
+                              '7',
+                              '8'
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value,
+                                    style: TextStyle(
+                                        color: state.darkMode
+                                            ? Colors.white
+                                            : Colors.black)),
+                              );
+                            }).toList(),
+                          ),
                         ),
                       ],
                     ),
@@ -204,31 +211,38 @@ class _SettingsState extends State<Settings> {
                               color:
                                   state.darkMode ? Colors.white : Colors.black),
                         ),
-                        DropdownButton<String>(
-                          value: state.mealsPerDay.toString(),
-                          icon: const Icon(Icons.arrow_downward),
-                          iconSize: 24,
-                          elevation: 16,
-                          style: TextStyle(
-                              color:
-                                  state.darkMode ? Colors.white : Colors.black),
-                          underline: Container(height: 2, color: Colors.green),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              state.mealsPerDay = int.parse(newValue!);
-                            });
-                          },
-                          items: <String>['1', '2', '3', '4', '5']
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value,
-                                  style: TextStyle(
-                                      color: state.darkMode
-                                          ? Colors.white
-                                          : Colors.black)),
-                            );
-                          }).toList(),
+                        Theme(
+                          data: Theme.of(context).copyWith(
+                            canvasColor: state.darkMode
+                                ? Colors.black
+                                : Colors.white,
+                          ),
+                          child: DropdownButton<String>(
+                            value: state.mealsPerDay.toString(),
+                            icon: const Icon(Icons.arrow_downward),
+                            iconSize: 24,
+                            elevation: 16,
+                            style: TextStyle(
+                                color:
+                                    state.darkMode ? Colors.white : Colors.black),
+                            underline: Container(height: 2, color: Colors.green),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                state.mealsPerDay = int.parse(newValue!);
+                              });
+                            },
+                            items: <String>['1', '2', '3', '4', '5']
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value,
+                                    style: TextStyle(
+                                        color: state.darkMode
+                                            ? Colors.white
+                                            : Colors.black)),
+                              );
+                            }).toList(),
+                          ),
                         ),
                       ],
                     ),
@@ -245,41 +259,48 @@ class _SettingsState extends State<Settings> {
                               color:
                                   state.darkMode ? Colors.white : Colors.black),
                         ),
-                        DropdownButton<String>(
-                          value: state.numDaysPlanned.toString(),
-                          icon: const Icon(Icons.arrow_downward),
-                          iconSize: 24,
-                          elevation: 16,
-                          style: TextStyle(
-                              color:
-                                  state.darkMode ? Colors.white : Colors.black),
-                          underline: Container(height: 2, color: Colors.green),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              state.numDaysPlanned = int.parse(newValue!);
-                            });
-                          },
-                          items: <String>[
-                            '1',
-                            '2',
-                            '3',
-                            '4',
-                            '5',
-                            '6',
-                            '7',
-                            '8',
-                            '9',
-                            '10',
-                            '11',
-                            '12',
-                            '13',
-                            '14'
-                          ].map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
+                        Theme(
+                          data: Theme.of(context).copyWith(
+                            canvasColor: state.darkMode
+                                ? Colors.black
+                                : Colors.white,
+                          ),
+                          child: DropdownButton<String>(
+                            value: state.numDaysPlanned.toString(),
+                            icon: const Icon(Icons.arrow_downward),
+                            iconSize: 24,
+                            elevation: 16,
+                            style: TextStyle(
+                                color:
+                                    state.darkMode ? Colors.white : Colors.black),
+                            underline: Container(height: 2, color: Colors.green),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                state.numDaysPlanned = int.parse(newValue!);
+                              });
+                            },
+                            items: <String>[
+                              '1',
+                              '2',
+                              '3',
+                              '4',
+                              '5',
+                              '6',
+                              '7',
+                              '8',
+                              '9',
+                              '10',
+                              '11',
+                              '12',
+                              '13',
+                              '14'
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
                         ),
                       ],
                     ),
