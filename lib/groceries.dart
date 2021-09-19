@@ -67,15 +67,28 @@ class _GroceriesState extends State<Groceries> {
                             child: CheckboxListTile(
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 20.0, vertical: 10.0),
-                              title: Text(
-                                  "${num.tryParse(state.groceries.values
+                              title: Column(
+                                children: [
+                                  if(state.groceries.values
                                       .elementAt(index)
-                                      .quantity
-                                      ?.toStringAsFixed(1) ?? "") ?? ""} ${state
-                                      .groceries.values
-                                      .elementAt(index)
-                                      .unit ?? ""} ${state.groceries.keys
-                                      .elementAt(index)}"),
+                                      .quantity == 0) ...[
+                                    Text(
+                                        "${state.groceries.keys
+                                            .elementAt(index)}",
+                                        style: TextStyle(fontSize: 16.0)),
+                                  ] else ...[
+                                    Text(
+                                        "${num.tryParse(state.groceries.values
+                                            .elementAt(index)
+                                            .quantity
+                                            ?.toStringAsFixed(1) ?? "") ?? ""} ${state
+                                            .groceries.values
+                                            .elementAt(index)
+                                            .unit ?? ""} ${state.groceries.keys
+                                            .elementAt(index)}"),
+                                  ]
+                                ],
+                              ),
                               value:
                               state.groceries.values
                                   .elementAt(index)

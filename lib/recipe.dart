@@ -100,9 +100,19 @@ class _RecipeState extends State<Recipe> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: state.activeRecipe.ingredients.entries
-                            .map((ing) => Text(
-                                "• ${num.tryParse(ing.value.quantity?.toStringAsFixed(1) ?? "") ?? ""} ${ing.value.unit ?? ""} ${ing.key}",
-                                style: TextStyle(fontSize: 16.0)))
+                            .map((ing) => Column(
+                              children: [
+                                if(ing.value.quantity == 0) ...[
+                                  Text(
+                                      "• ${ing.key}",
+                                      style: TextStyle(fontSize: 16.0)),
+                                ] else ...[
+                                  Text(
+                                      "• ${num.tryParse(ing.value.quantity?.toStringAsFixed(1) ?? "") ?? ""} ${ing.value.unit ?? ""} ${ing.key}",
+                                      style: TextStyle(fontSize: 16.0)),
+                                ]
+                              ],
+                            ))
                             .toList(),
                       ),
                       Padding(
