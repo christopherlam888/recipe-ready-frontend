@@ -103,7 +103,7 @@ class _PlanState extends State<Plan> {
             Provider.of<StateTracker>(context, listen: false)
                 .fetchMoreRecipes();
           },
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.green.shade300,
           icon: Icon(
             Icons.add,
             color: Colors.black,
