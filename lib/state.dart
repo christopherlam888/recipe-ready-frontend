@@ -186,10 +186,10 @@ class StateTracker extends ChangeNotifier {
     clearRecipes();
     List<Recipe> newRecipes = await fetchRecipes(mealsPerDay * numDaysPlanned);
     final now = DateTime.now();
+    int offset = 0;
     for (int i = 0; i < newRecipes.length; i++) {
-      int offset = 0;
-      if ((i + 1) % mealsPerDay == 0) offset++;
-      newRecipes[i].date = DateTime(now.year, now.month, now.day + offset);
+      if (i % mealsPerDay == 0) offset++;
+      newRecipes[i].date = DateTime(now.year, now.month, now.day + offset - 1);
       addRecipe(newRecipes[i]);
     }
   }
