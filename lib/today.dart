@@ -89,15 +89,22 @@ class _TodayState extends State<Today> {
                                       ],
                                     ),
                                     Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
-                                        Text(
-                                          state.todayRecipes[index].name,
-                                          style: TextStyle(fontSize: 20),
+                                        Container(
+                                          width: 230,
+                                          child: Text(
+                                            state.todayRecipes[index].name,
+                                            style: TextStyle(fontSize: 20),
+                                          ),
                                         ),
-                                        Text(
-                                          state.todayRecipes[index].description ??
-                                              "",
-                                          style: TextStyle(fontSize: 16),
+                                        Container(
+                                          width: 230,
+                                          child: Text(
+                                            state.todayRecipes[index].description ??
+                                                "",
+                                            style: TextStyle(fontSize: 16),
+                                          ),
                                         ),
                                       ],
                                     )
