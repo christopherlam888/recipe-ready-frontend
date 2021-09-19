@@ -113,21 +113,28 @@ class _TodayState extends State<Today> {
                                         ],
                                       ),
                                       Column(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
-                                          Text(
-                                            state.todayRecipes[index].name,
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                color: state.darkMode
-                                                    ? Colors.white
-                                                    : Colors.black,
-                                                fontWeight: FontWeight.bold),
+                                          Container(
+                                            width: 230,
+                                            child: Text(
+                                              state.todayRecipes[index].name,
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: state.darkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
                                           ),
-                                          Text(
-                                            state.todayRecipes[index]
-                                                    .description ??
-                                                "",
-                                            style: TextStyle(fontSize: 16),
+                                          Container(
+                                            width: 230,
+                                            child: Text(
+                                              state.todayRecipes[index]
+                                                      .description ??
+                                                  "",
+                                              style: TextStyle(fontSize: 16),
+                                            ),
                                           ),
                                         ],
                                       )
@@ -145,38 +152,6 @@ class _TodayState extends State<Today> {
                                       errorWidget: (context, url, error) =>
                                           Icon(Icons.error),
                                     ),
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          width: 230,
-                                          child: Text(
-                                            state.todayRecipes[index].name,
-                                            style: TextStyle(fontSize: 20),
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 230,
-                                          child: Text(
-                                            state.todayRecipes[index].description ??
-                                                "",
-                                            style: TextStyle(fontSize: 16),
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 10.0),
-                                  child: CachedNetworkImage(
-                                    imageUrl:
-                                        state.todayRecipes[index].imageLink ?? "",
-                                    placeholder: (context, url) =>
-                                        CircularProgressIndicator(),
-                                    errorWidget: (context, url, error) =>
-                                        Icon(Icons.error),
                                   ),
                                 ],
                               ),
