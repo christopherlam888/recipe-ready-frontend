@@ -22,7 +22,7 @@ class _RecipeState extends State<Recipe> {
           ? Colors.black
           : Colors.grey.shade700,
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 10.0),
         child: Container(
           decoration: BoxDecoration(
             color: Provider.of<StateTracker>(context, listen: true).darkMode

@@ -102,7 +102,7 @@ class _TodayState extends State<Today> {
                                 children: [
                                   Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                                        MainAxisAlignment.spaceAround,
                                     children: [
                                       Column(
                                         children: [
@@ -129,7 +129,7 @@ class _TodayState extends State<Today> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           Container(
-                                            width: 230,
+                                            width: 290,
                                             child: Text(
                                               state.todayRecipes[index].name,
                                               style: TextStyle(

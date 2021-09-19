@@ -198,7 +198,7 @@ class StateTracker extends ChangeNotifier {
     final response = await http.get(Uri.parse(
         "$ROOT_URL?limit=$limit&vegan=$vegan&vegetarian=$vegetarian&halal=$halal&no_tree_nuts=$noTreenuts&no_dairy=$noDairy&no_peanuts=$noPeanuts"));
     if (response.statusCode == 200) {
-      return (jsonDecode(response.body) as List)
+      return (jsonDecode(utf8.decode(response.bodyBytes)) as List)
           .map((i) => Recipe.fromJson(i))
           .toList();
     } else {
