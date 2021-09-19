@@ -18,7 +18,9 @@ Recipe _$RecipeFromJson(Map<String, dynamic> json) {
     json['prep_time'] as int?,
     json['yield'] as int?,
     json['description'] as String?,
-    json['ingredients'] as Map<String, dynamic>,
+    (json['ingredients'] as Map<String, dynamic>).map(
+      (k, e) => MapEntry(k, Grocery.fromJson(e as Map<String, dynamic>)),
+    ),
     (json['steps'] as List<dynamic>?)?.map((e) => e as String).toList(),
     json['vegan'] as bool,
     json['vegetarian'] as bool,
@@ -44,4 +46,22 @@ Map<String, dynamic> _$RecipeToJson(Recipe instance) => <String, dynamic>{
       'treenut_free': instance.noTreenuts,
       'peanut_free': instance.noPeanuts,
       'dairy_free': instance.noDairy,
+    };
+
+Grocery _$GroceryFromJson(Map<String, dynamic> json) => Grocery(
+      json['quantity'] as num?,
+      json['unit'] as String?,
+      json['calories'] as num?,
+      json['price'] as num?,
+      json['image'] as String,
+      json['price_per_unit'] as String?,
+    );
+
+Map<String, dynamic> _$GroceryToJson(Grocery instance) => <String, dynamic>{
+      'quantity': instance.quantity,
+      'unit': instance.unit,
+      'calories': instance.calories,
+      'price': instance.price,
+      'image': instance.imageLink,
+      'price_per_unit': instance.pricePerUnit,
     };
