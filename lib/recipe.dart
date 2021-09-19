@@ -116,8 +116,13 @@ class _RecipeState extends State<Recipe> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: state.activeRecipe.steps!
-                            .map((step) => Text("• " + step,
-                                style: TextStyle(fontSize: 16.0)))
+                            .map((step) => Column(
+                              children: [
+                                Text("• " + step,
+                                    style: TextStyle(fontSize: 16.0)),
+                                SizedBox(height: 10.0),
+                              ],
+                            ))
                             .toList(),
                       ),
                     ],
